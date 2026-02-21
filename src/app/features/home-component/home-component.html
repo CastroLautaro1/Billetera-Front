@@ -1,1 +1,67 @@
-<p>home-component works!</p>
+<div class="dashboard-container">
+  
+  <section class="balance-card">
+    <div class="card-header">
+      <span>Hola, Lautaro</span>
+      <div class="header-icons">
+        <i class="bi bi-eye"></i> <i class="bi bi-person-circle"></i>
+      </div>
+    </div>
+    <div class="balance-content">
+      <span class="currency">$</span>
+      <span class="amount">2.500,00</span>
+    </div>
+  </section>
+
+  <section class="actions-grid">
+    <button class="action-btn">
+      <div class="icon-circle"><i class="bi bi-plus-lg"></i></div>
+      <span>Depositar</span>
+    </button>
+    <button class="action-btn">
+      <div class="icon-circle"><i class="bi bi-send"></i></div>
+      <span>Transferir</span>
+    </button>
+    <button class="action-btn">
+      <div class="icon-circle"><i class="bi bi-credit-card"></i></div>
+      <span>Retirar</span>
+    </button>
+  </section>
+
+  <section class="activity-section">
+    <div class="section-header">
+      <h2>Actividad reciente</h2>
+      <a href="#" class="view-all">Ver todo <i class="bi bi-chevron-right"></i></a>
+    </div>
+
+    <div class="transaction-list">
+      <div class="transaction-item">
+        <div class="transaction-info">
+          <div class="type-icon deposit"><i class="bi bi-arrow-down-left"></i></div>
+          <div>
+            <p class="title">Depósito de Juan Pérez</p>
+            <p class="subtitle">Transferencia</p>
+          </div>
+        </div>
+        <div class="transaction-values">
+          <p class="amount positive">+$500,00</p>
+          <p class="date">5 feb</p>
+        </div>
+      </div>
+
+      <div class="transaction-item">
+        <div class="transaction-info">
+          <div class="type-icon expense"><i class="bi bi-bag"></i></div>
+          <div>
+            <p class="title">Compra en SuperMercado</p>
+            <p class="subtitle">shopping</p>
+          </div>
+        </div>
+        <div class="transaction-values">
+          <p class="amount negative">-$126,00</p>
+          <p class="date">7 feb</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

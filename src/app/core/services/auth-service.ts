@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Login } from '../../shared/models/Login';
 import { tap } from 'rxjs';
+import { Login } from '../../shared/models/Login';
 import { Register } from '../../shared/models/Register';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   register(data: Register) {
-    return this.http.post<void>(`${this.API_URL}/register`, data);
+    return this.http.post(`${this.API_URL}/register`, data, { responseType: 'text' });
   }
 
   logout() {
