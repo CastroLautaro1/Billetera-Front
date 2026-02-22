@@ -1,6 +1,6 @@
 export interface Account {
     id: number,
-    idUser: number,
+    user_id: number,
     cvu: string,
     alias: string,
     balance: number,
