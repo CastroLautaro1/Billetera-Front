@@ -1,0 +1,5 @@
+@if (name()) {
+  {{ name()?.firstname }} {{ name()?.lastname }}
+} @else {
+  <span class="loading-text">Cargando...</span>
+}

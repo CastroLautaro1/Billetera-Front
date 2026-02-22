@@ -1,0 +1,30 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <div class="logo-box">
+      <mat-icon>account_balance_wallet</mat-icon>
+    </div>
+    <span class="brand-name">Oran</span>
+  </div>
+
+  <div class="navbar-actions">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    
+    <mat-menu #menu="matMenu" class="custom-menu">
+      <button mat-menu-item>
+        <mat-icon>person_outline</mat-icon>
+        <span>Ver Perfil</span>
+      </button>
+      <button mat-menu-item (click)="toggleDarkMode()">
+        <mat-icon>dark_mode</mat-icon>
+        <span>Modo Oscuro</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item class="logout-item" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+      </button>
+    </mat-menu>
+  </div>
+</nav>
