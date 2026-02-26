@@ -8,6 +8,7 @@ import { MatMenuTrigger } from "../../../../node_modules/@angular/material/menu/
 import { DatePipe } from '@angular/common';
 import { map, tap } from 'rxjs';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-component',
@@ -19,6 +20,8 @@ export class HomeComponent {
   private _account = inject(AccountService);
   private _user = inject(UserService);
   private _transaction = inject(TransactionService);
+  private _router = inject(Router);
+
   userAccount = toSignal(
     this._account.getProfile(),
     {initialValue : undefined}
@@ -33,5 +36,9 @@ export class HomeComponent {
     this._transaction.getHistory(0, 6),
     {initialValue : undefined}
   )
+
+  toTransfer() {
+    this._router.navigate(['transferContact']);
+  }
 
 }

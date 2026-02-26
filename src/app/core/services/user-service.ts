@@ -15,8 +15,10 @@ export class UserService {
     return this.http.get<User>(`${this.API_URL}/profile`);
   }
 
+  /* Seria mejor crear un DTO que solo tenga firstname y lastname en lugar de usar User directamente*/
+  /* Obtiene el nombre completo del usuario segun su AccountId */  
   getFullname(accountId: number) {
-    return this.http.get<User>(`${this.API_URL}/data/${accountId}`);
+    return this.http.get<User>(`${this.API_URL}/fullname/${accountId}`);
   }
 
 }

@@ -2,13 +2,13 @@
   padding: 20px;
   max-width: 900px;
   margin: 0 auto;
-  background-color: #f8f9fa;
+  background-color: var(--bg-main);
   min-height: 100vh;
 }
 
 /* Tarjeta Naranja de Saldo */
 .balance-card {
-  background-color: var(--accent-color); /* #FF6600 */
+  background-color: var(--accent-primary); /* #FF6600 */
   color: white;
   border-radius: 15px;
   padding: 45px 35px;
@@ -43,10 +43,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
-  background: white;
+  background: var(--bg-card);
   padding: 25px;
   border-radius: 15px;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--border-medium);
   margin-bottom: 25px;
 }
 
@@ -60,21 +60,27 @@
 .action-icon {
   width: 50px;
   height: 50px;
-  border: 2px solid var(--accent-color);
+  border: 2px solid var(--accent-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 8px;
-  color: var(--accent-color);
+  color: var(--accent-primary);
+}
+
+/* Mejorarlo por que casi no se nota */
+.action-icon:hover {
+  color: var(--accent-hover);
+  border: 2px solid var(--accent-hover);
 }
 
 /* Actividad Reciente */
 .activity-section {
-  background: white;
+  background: var(--bg-card);
   padding: 25px;
   border-radius: 15px;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--border-medium);
 }
 
 .section-header {
@@ -91,11 +97,15 @@
 }
 
 .view-all {
-  color: var(--accent-color);
+  color: var(--accent-primary);
   text-decoration: none;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
+}
+
+.view-all:hover {
+  color: var(--accent-hover);
 }
 
 /* Items de Transacción */
@@ -109,7 +119,7 @@
   justify-content: space-between;
   align-items: center; /* Alinea verticalmente al centro */
   padding: 16px 0;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .transaction-item:last-child {
@@ -132,12 +142,12 @@
 
 .details .title {
   font-weight: 600;
-  color: #1a1f2b;
+  color: var(--text-main);
   font-size: 0.95rem;
 }
 
 .details .subtitle {
-  color: #6c757d;
+  color: var(--text-muted);
   font-size: 0.85rem;
   text-transform: lowercase;
 }
@@ -155,26 +165,26 @@
 
 .transaction-amount span {
   font-size: 0.8rem;
-  color: #adb5bd;
+  color: var(--text-main);
 }
 
 /* Colores dinámicos */
-.positive p { color: #28a745; }
-.negative p { color: #1a1f2b; }
+.positive p { color: var(--success); }
+.negative p { color: var(--text-main); }
 
 .icon-box {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background-color: #f8f9fa;
+  background-color: var(--accent-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6c757d;
+  color: var(--accent-primary);
   transition: all 0.2s;
 }
 
 .icon-box.deposit {
-  background-color: #fff0e6;
-  color: var(--accent-color);
+  background-color: var(--accent-light);
+  color: var(--accent-light);
 }

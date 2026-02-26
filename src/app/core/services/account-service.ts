@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Account } from '../../shared/models/Account';
+import { AccountPublicData } from '../../shared/models/AccountPublicData';
 
 @Injectable({
   providedIn: 'root',
@@ -13,5 +14,13 @@ export class AccountService {
   getProfile() {
     return this.http.get<Account>(`${this.API_URL}/me`);
   }
+
+  getAccountPublicData(accountId : number) {
+    return this.http.get<AccountPublicData>(`${this.API_URL}/data/${accountId}`);
+  }
   
+  // Obtiene informacion de la cuenta mediante el Alias o CVU
+  getByDestination(destination: string) {
+    return this.http.get<AccountPublicData>(`${this.API_URL}/search/${destination}`);
+  }
 }

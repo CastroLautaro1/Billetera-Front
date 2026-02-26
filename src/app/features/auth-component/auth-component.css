@@ -1,6 +1,6 @@
 :host {
-  --mdc-outlined-text-field-focus-outline-color: var(--accent-color);
-  --mdc-outlined-text-field-focus-label-text-color: var(--accent-color);
+  --mdc-outlined-text-field-focus-outline-color: var(--accent-primary);
+  --mdc-outlined-text-field-focus-label-text-color: var(--accent-primary);
 }
 
 .auth-container {
@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #f8f9fa;
+  background-color: var(--bg-main);
   padding: 20px;
   box-sizing: border-box;
 }
@@ -22,7 +22,7 @@
 }
 
 .logo-box {
-  background-color: var(--accent-color);
+  background-color: var(--accent-primary);
   color: white;
   width: 60px;
   height: 60px;
@@ -46,11 +46,11 @@
   font-size: 2.2rem; 
   margin: 0; 
   font-weight: 700; 
-  color: #1a1f2b; 
+  color: var(--text-main); 
 }
 
 .auth-card {
-  background: white;
+  background: var(--bg-card);
   width: 100%;
   max-width: 450px;
   border-radius: 20px;
@@ -61,7 +61,7 @@
 
 .auth-tabs {
   display: flex;
-  background-color: #1a1f2b;
+  background-color: var(--bg-main);
   border-radius: 12px;
   padding: 5px;
   /* 2. Aumentar margen inferior para separar del primer input */
@@ -72,7 +72,7 @@
   flex: 1;
   border: none;
   background: none;
-  color: #6c757d;
+  color: var(--text-main);
   padding: 12px;
   border-radius: 8px;
   font-weight: 600;
@@ -80,7 +80,7 @@
 }
 
 .auth-tabs button.active {
-  background-color: var(--accent-color);
+  background-color: var(--accent-primary);
   color: white;
 }
 
@@ -95,7 +95,7 @@ mat-form-field {
 
 .btn-primary {
   width: 100%;
-  background-color: var(--accent-color) !important;
+  background-color: var(--accent-primary) !important;
   color: white !important;
   padding: 25px !important;
   border-radius: 12px !important;
@@ -106,7 +106,7 @@ mat-form-field {
 .forgot-password {
   display: block;
   text-align: right;
-  color: var(--accent-color);
+  color: var(--accent-primary);
   text-decoration: none;
   font-size: 0.85rem;
   margin-bottom: 15px;
@@ -116,27 +116,27 @@ mat-form-field {
 .auth-footer { 
   /* 4. Separar el footer */
   margin-top: 50px; 
-  color: var(--text-secondary); 
+  color: var(--text-muted); 
   font-size: 0.85rem; 
 }
 
 /* Ajuste de iconos matPrefix */
 i[matPrefix] {
-  color: #adb5bd;
+  color: var(--text-placeholder);
   font-size: 1.2rem;
   margin-right: 12px;
 }
 
 /* Color de los iconos cuando no están en foco */
 mat-icon[matPrefix] {
-  color: #adb5bd;
+  color: var(--text-placeholder);;
   margin-right: 12px; /* Espacio entre el icono y el texto */
   transform: scale(0.9); /* Ajuste de tamaño opcional */
 }
 
 /* Color de los iconos cuando el usuario hace clic en el input */
 .mat-mdc-form-field.mat-focused mat-icon[matPrefix] {
-  color: var(--accent-color); /* Se pone naranja Oran al escribir */
+  color: var(--accent-primary); /* Se pone naranja Oran al escribir */
 }
 
 /* Ajuste para centrar el icono verticalmente */

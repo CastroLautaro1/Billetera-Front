@@ -17,8 +17,12 @@
         <span>Ver Perfil</span>
       </button>
       <button mat-menu-item (click)="toggleDarkMode()">
-        <mat-icon>dark_mode</mat-icon>
-        <span>Modo Oscuro</span>
+        <mat-icon>
+          {{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}
+        </mat-icon>
+        <span>
+          {{ themeService.isDarkMode() ? 'Modo Claro' : 'Modo Oscuro' }}
+        </span>
       </button>
       <mat-divider></mat-divider>
       <button mat-menu-item class="logout-item" (click)="logout()">

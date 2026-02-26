@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #f1f1f1;
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-medium);
   height: 60px;
   position: sticky;
   top: 0;
@@ -18,7 +18,7 @@
 }
 
 .logo-box {
-  background-color: var(--accent-color); /* #FF6600 */
+  background-color: var(--accent-primary); 
   color: white;
   width: 35px;
   height: 35px;
@@ -37,11 +37,11 @@
 .brand-name {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #1a1f2b;
+  color: var(--text-main);
 }
 
 .menu-button {
-  color: #1a1f2b;
+  color: var(--text-main);
 }
 
 /* Estilos para el Mat-Menu (pueden ir en styles.css global si es necesario) */
@@ -52,24 +52,30 @@
 
 ::ng-deep .mat-mdc-menu-item {
   font-size: 0.95rem !important;
-  color: #1a1f2b !important;
+  color: var(--text-main) !important;
+}
+
+::ng-deep .mat-mdc-menu-item:hover {
+  background-color: var(--bg-hover) !important;
 }
 
 ::ng-deep .logout-item {
-  color: #dc3545 !important; /* Rojo para cerrar sesión */
+  color: var(--danger) !important; /* Rojo para cerrar sesión */
 }
 
 ::ng-deep .logout-item mat-icon {
-  color: #dc3545 !important;
+  color: var(--danger) !important;
 }
 
 /* Aseguramos que el contenedor del menú sea una columna */
 ::ng-deep .mat-mdc-menu-panel {
   min-width: 180px !important;
   max-width: 250px !important;
-  background-color: #ffffff !important;
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-medium) !important;
   border-radius: 12px !important;
   padding: 8px 0 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
 }
 
 /* Forzamos a que cada item sea una fila completa */
@@ -83,5 +89,5 @@
 /* Ajuste de iconos dentro del menú */
 ::ng-deep .mat-mdc-menu-item mat-icon {
   margin-right: 12px !important;
-  color: #1a1f2b;
+  color: var(--text-main);
 }
