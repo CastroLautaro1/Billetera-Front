@@ -1,0 +1,44 @@
+<div class="transfer-container">
+  <div class="transfer-header">
+    <button mat-icon-button class="back-btn" (click)="toHome()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Realizar transferencia</h1>
+  </div>
+
+  <div class="search-section">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input 
+        type="text" 
+        placeholder="Buscar por Alias o CVU" 
+        class="search-input" 
+        (input)="onSearchInput($event)">
+  </div>
+
+  <div class="contacts-section">
+    @if(searchResult()) {
+        <h2>Resultado de la busqueda</h2>
+        <div class="contacts-list">
+            <app-contact-card-component 
+                [accountId]="searchResult()!.counterpartyId" 
+                (click)="goToAmount(searchResult()!.counterpartyId)">
+            </app-contact-card-component>
+        </div>
+    } @else {
+        <h2>Contactos recientes</h2>
+        <div class="contacts-list">
+            @for(r of recentContactIds(); track r) {
+                <app-contact-card-component 
+                    [accountId]="r"
+                    [searchTerm]="searchQuery()"
+                    (click)="goToAmount(r)"
+                    >
+                </app-contact-card-component>
+            } @empty {
+                <p>No tienes contactos recientes.</p>
+            }
+        </div>
+    }
+    </div>
+      
+</div>

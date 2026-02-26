@@ -1,0 +1,93 @@
+.transfer-container {
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Cabecera */
+.transfer-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  gap: 15px;
+}
+
+.back-btn {
+  color: var(--accent-primary);
+}
+
+.back-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--accent-primary);
+}
+
+.transfer-header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* Buscador */
+.search-section {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-placeholder);
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 15px 18px 50px;
+  border: 1px solid var(--accent-primary); /* Borde naranja característico */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  background-color: var(--bg-card);
+  transition: box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+}
+
+.search-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Sección Contactos */
+.contacts-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 25px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light); /* Línea gris completa base */
+  position: relative;
+}
+
+/* El truco para la línea naranja que ocupa solo un tercio */
+.contacts-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 250px;
+  height: 2px;
+  background-color: var(--accent-primary);
+}
+
+/* Lista y Tarjetas */
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
