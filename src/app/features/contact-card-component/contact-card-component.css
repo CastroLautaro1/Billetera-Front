@@ -1,0 +1,40 @@
+.contact-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 25px;
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  background-color: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.contact-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.contact-info p {
+  margin: 0;
+}
+
+.contact-name {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 1.05rem;
+  margin-bottom: 6px !important;
+}
+
+.contact-cvu {
+  color: var(-text-muted);
+  font-size: 0.85rem;
+}
+
+.contact-alias {
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
