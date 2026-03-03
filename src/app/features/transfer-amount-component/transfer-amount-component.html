@@ -1,0 +1,53 @@
+<div class="amount-container">
+  <div class="header-actions">
+    <button mat-icon-button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <div class="balance-card-outline" [class.error-border]="hasInsufficientFunds()">
+    <p class="balance-label">Saldo disponible</p>
+    <p class="balance-value" [class.error-text]="hasInsufficientFunds()">
+      ${{ userAccount()?.balance }}
+    </p>
+  </div>
+
+  <div class="target-info">
+    <p class="target-label">Transferir a:</p>
+    <h2 class="target-name">{{ counterpartyData()?.firstname }} {{ counterpartyData()?.lastname }}</h2>
+    <p class="target-alias">{{ counterpartyData()?.cvu }}</p>
+  </div>
+
+  <div class="giant-input-wrapper">
+    <h1 class="giant-amount-display" 
+      [class.empty]="!amount()"
+      [class.error-text]="hasInsufficientFunds()">
+      {{ formattedAmount() }}
+    </h1>
+
+    <input
+      type="number"
+      class="hidden-amount-input"
+      (input)="updateAmount($event)"
+      step="0.01"
+      autofocus
+    />
+  </div>
+
+  <div class="amount-form">
+    <input
+      type="text"
+      class="custom-input detail-input"
+      placeholder="Ingresar detalle (opcional)"
+      (input)="updateDetails($event)"
+    />
+
+    <div class="action-container">
+      <button class="btn-outline-primary" 
+        [disabled]="!isValidTransfer()"
+        (click)="makeTransfer()">
+        Confirmar
+      </button>
+    </div>
+  </div>
+</div>

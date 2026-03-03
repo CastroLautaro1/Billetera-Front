@@ -1,0 +1,248 @@
+.amount-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  background-color: var(--bg-main);
+  min-height: calc(100vh - 60px); /* Restamos el navbar */
+  display: flex;
+  flex-direction: column;
+}
+
+.header-actions {
+  margin-bottom: 25px;
+}
+
+.back-btn {
+  color: var(--text-main);
+}
+
+/* Tarjeta de Saldo (Borde Naranja) */
+.balance-card-outline {
+  border: 2px solid var(--accent-primary);
+  border-radius: 12px;
+  padding: 20px 25px;
+  background-color: var(--bg-card);
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 80px;
+}
+
+.balance-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 10px 0;
+}
+
+.balance-value {
+  color: var(--text-main);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Información del Destinatario */
+.target-info {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.target-label {
+  color: var(--text-placeholder);
+  font-size: 0.85rem;
+  margin: 0 0 5px 0;
+}
+
+.target-name {
+  color: var(--text-main);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.target-alias {
+  color: var(--accent-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Monto Principal */
+.main-amount {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.main-amount h1 {
+  color: var(--text-main);
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+}
+
+.giant-input-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  min-height: 80px; /* Asegura que haya un área táctil grande */
+}
+
+.currency-symbol {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  /* Un pequeño margen para que no se pegue al número */
+  margin-right: 4px; 
+}
+
+/* El número visual que se expande */
+.giant-amount-display {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  pointer-events: none; /* Deja que los clics traspasen hacia el input */
+}
+
+/* Color gris si está en $0 */
+.giant-amount-display.empty {
+  color: var(--text-placeholder);
+}
+
+/* El input fantasma */
+.hidden-amount-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* 100% invisible */
+  cursor: text;
+  z-index: 10;
+}
+
+/* Ocultar flechitas del input number (por las dudas) */
+.hidden-amount-input::-webkit-outer-spin-button,
+.hidden-amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* El Input en sí mismo */
+.giant-amount-input {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  background: transparent;
+  border: none;
+  outline: none;
+  
+  /* Ancho inicial. Si permitís transferir millones, podés agrandarlo */
+  width: 200px; 
+  
+  /* Alineamos a la izquierda para que el número crezca alejándose del $ */
+  text-align: left; 
+}
+
+/* Color del 0 por defecto */
+.giant-amount-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* ESENCIAL: Ocultar las flechitas de subir/bajar del input type="number" */
+.giant-amount-input::-webkit-outer-spin-button,
+.giant-amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.giant-amount-input[type=number] {
+  -moz-appearance: textfield; /* Para Firefox */
+}
+
+/* Formulario e Inputs */
+.amount-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  text-align: center; /* Centra el texto del placeholder y del input */
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.custom-input:focus {
+  border-color: var(--accent-primary);
+}
+
+.custom-input::placeholder {
+  color: var(--text-placeholder);
+}
+
+/* Ocultar las flechitas del input number */
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.amount-input[type=number] {
+  appearance: textfield;
+}
+
+/* Botón de Confirmar */
+.action-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.btn-outline-primary {
+  padding: 12px 50px;
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 2px solid var(--accent-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.error-border {
+  border-color: var(--danger) !important;
+  background-color: rgba(220, 53, 69, 0.05); /* Un fondo rojizo muy sutil */
+}
+
+.error-text {
+  color: var(--danger) !important;
+}
+
+/* Estilo para el botón deshabilitado */
+.btn-outline-primary:disabled {
+  border-color: var(--border-medium);
+  color: var(--text-placeholder);
+  cursor: not-allowed;
+  background-color: transparent;
+}
