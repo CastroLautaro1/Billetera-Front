@@ -33,7 +33,7 @@ export class HomeComponent {
   )
 
   transactionHistory = toSignal(
-    this._transaction.getHistory(0, 6),
+    this._transaction.getHistory(0, 3),
     {initialValue : undefined}
   )
 

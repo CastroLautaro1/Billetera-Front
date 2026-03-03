@@ -1,7 +1,6 @@
-:host {
-  --mdc-outlined-text-field-focus-outline-color: var(--accent-primary);
-  --mdc-outlined-text-field-focus-label-text-color: var(--accent-primary);
-}
+/* 1. CAMBIAR EL AZUL POR NARANJA (Foco) */
+
+
 
 .auth-container {
   /* 1. Eliminar el scroll */

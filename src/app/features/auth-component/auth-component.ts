@@ -56,6 +56,7 @@ export class AuthComponent {
         this._auth.login(login).subscribe({
           next: (response) => {
             console.log('Login exitoso ', response);
+            this._router.navigate(['']);
           },
           error: (e) => console.error('Error al iniciar sesion ', e),
         });

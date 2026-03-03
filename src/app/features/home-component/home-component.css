@@ -31,6 +31,13 @@
 .balance-actions mat-icon {
   margin-left: 15px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out; /* Suaviza color, fondo y borde */
+  cursor: pointer;
+}
+
+.balance-actions mat-icon:hover {
+  transform: translateY(-2px) scale(1.1); 
+  color: var(--accent-light);
 }
 
 .balance-amount {
@@ -67,12 +74,15 @@
   justify-content: center;
   margin-bottom: 8px;
   color: var(--accent-primary);
+  transition: all 0.3s ease-in-out; /* Suaviza color, fondo y borde */
+  cursor: pointer;
 }
 
-/* Mejorarlo por que casi no se nota */
 .action-icon:hover {
-  color: var(--accent-hover);
-  border: 2px solid var(--accent-hover);
+  background-color: var(--accent-primary);
+  color: var(--bg-hover);
+  transform: translateY(-3px); 
+  box-shadow: 0 4px 12px rgba(255, 102, 0, 0.2);
 }
 
 /* Actividad Reciente */
