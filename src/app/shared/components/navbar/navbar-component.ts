@@ -4,6 +4,8 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { ThemeService } from '../../../core/services/theme-service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-navbar-component',
@@ -19,6 +21,9 @@ import { ThemeService } from '../../../core/services/theme-service';
 })
 export class NavbarComponent {
 
+  private _router = inject(Router);
+  private _auth = inject(AuthService);
+
   themeService = inject(ThemeService);
 
   toggleDarkMode() {
@@ -26,7 +31,12 @@ export class NavbarComponent {
   }
 
   logout(){
+    this._auth.logout();
+    this._router.navigate(['auth'])
+  }
 
+  goHome() {
+    this._router.navigate(['']);
   }
 
 }

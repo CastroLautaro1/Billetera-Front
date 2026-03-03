@@ -1,25 +1,105 @@
 /* Variables para el modo claro (modo por defecto) */
 :root {
-  --bg-color: #f4f7f6;           /* Gris muy claro para el fondo */
-  --card-bg: #ffffff;            /* Blanco para las tarjetas */
-  --text-primary: #333333;       /* Texto oscuro */
-  --accent-color: #ff6600;       /* Tu naranja característico */
-  --text-secondary: #666666;
+  /* =========================================
+     1. COLORES DE MARCA (Naranjas)
+     ========================================= */
+  --accent-primary: #ff6600;     /* Tu color principal */
+  --accent-hover: #e65c00;       /* Naranja un poco más oscuro para botones en hover */
+  --accent-light: #fff0e6;       /* Naranja muy pastel (ideal para el fondo de los iconos de depósito) */
+  
+  /* =========================================
+     2. FONDOS (Backgrounds)
+     ========================================= */
+  --bg-main: #f8f9fa;            /* Gris casi blanco para el fondo general de la app */
+  --bg-card: #ffffff;            /* Blanco puro para las tarjetas y contenedores */
+  --bg-hover: #f1f3f5;           /* Gris sutil para cuando pasas el mouse por una transacción */
+  
+  /* =========================================
+     3. TEXTOS Y TIPOGRAFÍA
+     ========================================= */
+  --text-main: #1a1f2b;          /* Azul/Gris muy oscuro (más elegante que el negro puro) */
+  --text-muted: #6c757d;         /* Gris medio para subtítulos (como "transferencia enviada") */
+  --text-placeholder: #adb5bd;   /* Gris claro para el input de búsqueda o fechas */
+  
+  /* =========================================
+     4. BORDES Y SEPARADORES
+     ========================================= */
+  --border-light: #f1f1f1;       /* Línea muy suave para separar transacciones */
+  --border-medium: #dee2e6;      /* Línea un poco más marcada para los inputs o tarjetas */
+  
+  /* =========================================
+     5. COLORES SEMÁNTICOS (Estados)
+     ========================================= */
+  --success: #28a745;            /* Verde para ingresos de dinero y mensajes de éxito */
+  --danger: #dc3545;             /* Rojo para errores o egresos fuertes */
+  --warning: #ffc107;            /* Amarillo para transacciones "pendientes" */
 }
 
-/* Variables para el modo oscuro */
+/* Variables para el Modo Oscuro */
 [data-theme='dark'] {
-  --bg-color: #121212;           /* Gris casi negro */
-  --card-bg: #1e1e1e;            /* Gris oscuro para resaltar del fondo */
-  --text-primary: #e0e0e0;       /* Texto claro */
-  --accent-color: #ff8533;       /* Un naranja ligeramente más vibrante */
-  --text-secondary: #b0b0b0;
+  /* 1. Marca */
+  --accent-primary: #ff8533;     /* Naranja más brillante para que resalte en la oscuridad */
+  --accent-hover: #ff9955;       
+  --accent-light: #331400;       /* Marrón oscuro/naranja para fondos de iconos */
+  
+  /* 2. Fondos */
+  --bg-main: #121212;            /* Negro base de Material Design */
+  --bg-card: #1e1e1e;            /* Gris muy oscuro para elevar las tarjetas */
+  --bg-hover: #2c2c2c;
+  
+  /* 3. Textos */
+  --text-main: #f8f9fa;          /* Blanco roto para no cansar la vista */
+  --text-muted: #adb5bd;
+  --text-placeholder: #6c757d;
+  
+  /* 4. Bordes */
+  --border-light: #2c2c2c;       
+  --border-medium: #404040;
+  
+  /* 5. Semánticos */
+  --success: #2ea043;            /* Verde ajustado para modo oscuro */
+  --danger: #da3633;
+  --warning: #e3b341;
 }
+
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  background-color: var(--bg-main);
+  color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease; 
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:host {
+  /* Color del borde cuando hacés clic */
+  --mdc-outlined-text-field-focus-outline-color: var(--accent-primary);
+  /* Color del texto del Label (Email/Contraseña) cuando hacés clic */
+  --mdc-outlined-text-field-focus-label-text-color: var(--accent-primary);
+  /* Color del "palito" que titila al escribir */
+  --mdc-outlined-text-field-caret-color: var(--accent-primary);
+}
+
+/* 2. ARREGLAR EL HOVER EN MODO OSCURO */
+:host-context(.dark-theme) {
+  /* Borde cuando pasás el mouse por encima (evita que desaparezca) */
+  --mdc-outlined-text-field-hover-outline-color: rgba(255, 255, 255, 0.5);
+  
+  /* Borde en estado normal (sin foco ni hover) */
+  --mdc-outlined-text-field-outline-color: rgba(255, 255, 255, 0.2);
+  
+  /* Texto del label en estado normal */
+  --mdc-outlined-text-field-label-text-color: rgba(255, 255, 255, 0.6);
+  
+  /* Asegurar que el texto que escribís sea blanco */
+  --mdc-outlined-text-field-input-text-color: #ffffff;
+}
+
+/* 3. CORRECCIÓN DE COLORES CRÍTICOS (Para que no use grises del sistema) */
+::ng-deep .dark-theme .mat-mdc-form-field-focus-overlay {
+  background-color: transparent !important; /* Quita una sombra gris interna molesta */
+}
+
+::ng-deep .dark-theme .mat-mdc-input-element {
+  color: white !important; /* Texto siempre blanco en modo oscuro */
+}
