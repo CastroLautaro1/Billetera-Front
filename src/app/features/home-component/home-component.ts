@@ -41,4 +41,8 @@ export class HomeComponent {
     this._router.navigate(['transferContact']);
   }
 
+  goHistory() {
+    this._router.navigate(['history']);
+  }
+
 }
