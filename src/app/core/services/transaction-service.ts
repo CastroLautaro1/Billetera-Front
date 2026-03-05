@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Transaction } from '../../shared/models/Transaction';
 import { Page } from '../../shared/models/Page';
@@ -25,10 +25,43 @@ export class TransactionService {
     return this.http.get<Transaction>(`${this.API_URL}/${transactionId}`);
   }
 
-  donwloadReceiptPdf(id: number): Observable<Blob> {
+  downloadReceiptPdf(id: number): Observable<Blob> {
     return this.http.get(`${this.API_URL}/${id}/receipt`, {
       responseType : 'blob'
     });
+  }
+
+  getHistoryWithFilter(
+    page: number,
+    size: number,
+    type?: string,
+    minAmount?: number,
+    maxAmount?: number,
+    start?: string,
+    end?: string
+  ): Observable<Page<Transaction>>{
+
+    let params = new HttpParams()
+      .set('page', page)
+      .set('size', size);
+
+    if(type) {
+      params = params.set('type', type);
+    }
+    if(minAmount != null) {
+      params = params.set('minAmount', minAmount.toString());
+    }
+    if(maxAmount != null) {
+      params = params.set('maxAmount', maxAmount.toString());
+    }
+    if(start) {
+      params = params.set('start', start);
+    }
+    if(end) {
+      params = params.set('end', end);
+    }
+
+    return this.http.get<Page<Transaction>>(`${this.API_URL}/history`, { params });
   }
 
 }
