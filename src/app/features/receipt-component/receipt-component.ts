@@ -74,7 +74,7 @@ export class ReceiptComponent {
 
     this.isDownloading.set(true);
 
-    this._transaction.donwloadReceiptPdf(txId).subscribe({
+    this._transaction.downloadReceiptPdf(txId).subscribe({
       next: (blob: Blob) => {
         // 1. Creamos una URL temporal en el navegador para el archivo (Blob)
         const fileUrl = window.URL.createObjectURL(blob);
@@ -95,7 +95,7 @@ export class ReceiptComponent {
         window.URL.revokeObjectURL(fileUrl);
       },
       error: (error) => {
-        console.error('Error al descargar el comprobante desde el servidor', error);
+        console.error('Error al descargar el comprobante desde el servidor', error)
         // Acá podrías mostrar un cartelito (SnackBar) diciendo "Error al descargar"
       },
       complete: () => {

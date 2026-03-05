@@ -17,6 +17,10 @@
   gap: 12px;
 }
 
+.navbar-brand:hover {
+  cursor: pointer;
+}
+
 .logo-box {
   background-color: var(--accent-primary); 
   color: white;

@@ -1,0 +1,84 @@
+<div class="history-container">
+  
+  <section class="filters-section" [formGroup]="filterForm">
+    <div class="filter-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Monto mínimo</mat-label>
+        <input matInput type="number" formControlName="minAmount" placeholder="0">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Monto máximo</mat-label>
+        <input matInput type="number" formControlName="maxAmount" placeholder="999999">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="date-range">
+        <mat-label>Rango de fechas</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate formControlName="start" placeholder="Inicio">
+          <input matEndDate formControlName="end" placeholder="Fin">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="">Todos</mat-option>
+          <mat-option value="TRANSFER">Transferencia</mat-option>
+          <mat-option value="DEPOSIT">Depósito</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button class="btn-apply" (click)="applyFilters()">Aplicar</button>
+    </div>
+
+    <div class="action-row">
+       <button mat-stroked-button color="warn" class="btn-clear" (click)="clearFilters()">
+        <mat-icon>close</mat-icon> Limpiar
+      </button>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <mat-form-field appearance="outline" class="full-width search-input">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Buscar por nombre" (input)="onSearch($event)">
+    </mat-form-field>
+  </section>
+
+  <section class="transactions-section">
+    <h2 class="section-title">Recientes</h2>
+    
+    <div class="transaction-list">
+      @for (tx of transactions(); track tx.id) {
+        <div class="transaction-card">
+          <div class="card-left">
+            <div class="icon-circle">
+              <mat-icon>arrow_forward</mat-icon>
+            </div>
+            <div class="info">
+              <app-user-fullname-component [accountId]="tx.counterpartyAccountId">   
+              </app-user-fullname-component>
+              <p>{{ tx.transactionType === 'TRANSFER' ? 'Transferencia enviada' : 'Depósito recibido' }}</p>
+            </div>
+          </div>
+          <div class="card-right">
+            <span class="amount">${{ tx.amount | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <mat-paginator 
+        [length]="totalElements()"
+        [pageSize]="10"
+        [pageIndex]="currentPage"
+        [pageSizeOptions]="[5, 10, 25]"
+        (page)="onPageChange($event)"
+        aria-label="Seleccionar página">
+    </mat-paginator>
+  </section>
+
+</div>
