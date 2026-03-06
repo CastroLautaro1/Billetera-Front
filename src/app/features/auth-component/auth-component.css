@@ -74,6 +74,10 @@
   cursor: pointer;
 }
 
+.auth-tabs button:hover {
+  background-color: var(--bg-hover);
+}
+
 .auth-tabs button.active {
   background-color: var(--accent-primary);
   color: white;
@@ -96,6 +100,11 @@ mat-form-field {
   border-radius: 12px !important;
   font-weight: 500 !important;
   margin-top: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
 }
 
 .forgot-password {

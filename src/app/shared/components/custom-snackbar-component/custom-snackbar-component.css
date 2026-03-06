@@ -1,0 +1,11 @@
+.snack-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.snack-container mat-icon {
+  color: var(--accent-primary); 
+}

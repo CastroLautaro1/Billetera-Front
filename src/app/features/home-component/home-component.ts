@@ -9,6 +9,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { map, tap } from 'rxjs';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { UserModalComponent } from '../user-modal-component/user-modal-component';
 
 @Component({
   selector: 'app-home-component',
@@ -21,6 +23,7 @@ export class HomeComponent {
   private _user = inject(UserService);
   private _transaction = inject(TransactionService);
   private _router = inject(Router);
+  private _dialog = inject(MatDialog);
   amountVisible = true;
 
   userAccount = toSignal(
@@ -38,8 +41,20 @@ export class HomeComponent {
     {initialValue : undefined}
   )
 
+  openUserModal() {
+    this._dialog.open(UserModalComponent, {
+      width: '450px',          
+      panelClass: 'custom-modal-container', 
+      autoFocus: false
+    })
+  }
+
   toggleAmount() {
     this.amountVisible = !this.amountVisible;
+  }
+
+  goProfile() {
+    this._router.navigate(['profile']);
   }
 
   toTransfer() {

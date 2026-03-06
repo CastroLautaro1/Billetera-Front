@@ -5,6 +5,7 @@ import { TransferContactComponent } from './features/transfer-contact-component/
 import { TransferAmountComponent } from './features/transfer-amount-component/transfer-amount-component';
 import { ReceiptComponent } from './features/receipt-component/receipt-component';
 import { HistoryComponent } from './features/history-component/history-component';
+import { UserModalComponent } from './features/user-modal-component/user-modal-component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
