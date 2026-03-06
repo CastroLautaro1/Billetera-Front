@@ -64,7 +64,7 @@
           <div class="transaction-card">
             <div class="card-left">
               <div class="icon-circle-oran">
-                <mat-icon>arrow_forward</mat-icon>
+                <mat-icon>{{ isEntry(tx) ? 'south_west' : 'send' }}</mat-icon>
               </div>
               <div class="info">
                 <h3>
@@ -73,16 +73,15 @@
                   </app-user-fullname-component>
                 </h3>
                 @if (tx.transactionType === 'TRANSFER') {
-                  @if (tx.counterpartyAccountId === userAccount()?.id) {
-                    <p>Transferencia recibida</p>
-                  } @else {
-                    <p>Transferencia enviada</p>
-                  }
+                  <p>{{ isEntry(tx) ? 'Transferencia recibida' : 'Transferencia enviada'}}</p>
                 }
               </div>
             </div>
-            <div class="card-right">
-              <span class="amount-oran">${{ tx.amount | number:'1.2-2' }}</span>
+            <div class="card-right" [class.positive]="isEntry(tx)">
+              <span class="amount-oran">
+                {{ isEntry(tx) ? '+' : '-'}}${{ tx.amount | number:'1.2-2'}}
+              </span>
+              <p>{{ tx.timestamp | date:'dd MMM'}}</p>
             </div>
           </div>
         }

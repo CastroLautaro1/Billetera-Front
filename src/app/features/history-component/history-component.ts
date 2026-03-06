@@ -107,5 +107,11 @@ export class HistoryComponent {
 
   }
 
+  isEntry(t: any): boolean {
+    if (t.transactionType === 'DEPOSIT') return true;
+
+    return t.transactionType === 'TRANSFER' && t.counterpartyAccountId === this.userAccount()?.id;
+  }
+
 
 }

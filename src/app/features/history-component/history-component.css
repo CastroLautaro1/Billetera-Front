@@ -5,37 +5,38 @@
   max-width: 1300px;
   margin: 0 auto;
   padding: 30px;
-  background-color: var(--bg-main); /* Fondo negro profundo */
+  background-color: var(--bg-main); 
   min-height: 100vh;
   color: white;
 }
 
 /* --- BARRA LATERAL DE FILTROS --- */
 .filters-sidebar {
-  flex: 0 0 280px; /* Ancho fijo para la sidebar */
-  background-color: var(--bg-card); /* Un gris casi negro para la tarjeta */
-  border: 1px solid var(--border-medium); /* Borde naranja muy sutil */
+  flex: 0 0 280px; 
+  background-color: var(--bg-card); 
+  border: 1px solid var(--border-medium); 
   border-radius: 15px;
   padding: 25px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  align-self: flex-start; /* No se estira verticalmente */
+  align-self: flex-start; 
 }
-
+/* TITULO: 'Filtros'*/
 .sidebar-title {
   color: var(--accent-primary);
   font-size: 1.5rem;
   margin: 0 0 10px 0;
   font-weight: 700;
 }
-
+/* Todos los filtros*/
 .filter-group {
   display: flex;
   flex-direction: column;
   gap: 5px; /* Amontonados verticalmente como en la imagen */
 }
 
+/* BOTONS DE APLICAR Y LIMPIAR */
 .sidebar-actions {
   display: flex;
   flex-direction: column;
@@ -43,7 +44,32 @@
   margin-top: auto; /* Empuja los botones al fondo de la sidebar */
 }
 
-/* --- ESTILOS COMPONENTES MATERIAL (Modo Oscuro/Oran) --- */
+/* --- Boton de aplicar filtros --- */
+.btn-apply {
+  background-color: var(--accent-primary) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  height: 45px !important;
+  font-weight: 600 !important;
+  border: none;
+}
+/* --- Boton de limpiar filtros --- */
+.btn-clear {
+  background-color: var(--bg-card);
+  color: var(--accent-primary) !important;
+  border-radius: 8px !important;
+  height: 45px !important;
+  border: 1px solid var(--accent-primary)
+}
+
+.btn-apply:hover {
+  background-color: var(--accent-hover) !important;
+}
+
+.btn-clear:hover {
+  background-color: var(--bg-hover);
+}
+
 .full-width {
   width: 100%;
 }
@@ -68,41 +94,15 @@
   color: var(--accent-primary) !important;
 }
 
-/* --- BOTONES DE LA SIDEBAR --- */
-.btn-apply {
-  background-color: var(--accent-primary) !important;
-  color: white !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  font-weight: 600 !important;
-  border: none;
-}
-
-.btn-clear {
-  background-color: var(--bg-card);
-  color: var(--accent-primary) !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  border: 1px solid var(--accent-primary)
-}
-
-.btn-apply:hover {
-  background-color: var(--accent-hover) !important;
-}
-
-.btn-clear:hover {
-  background-color: var(--bg-hover);
-}
-
 /* --- CONTENIDO PRINCIPAL --- */
 .main-content {
-  flex: 1; /* Toma el resto del espacio */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* --- BARRA DE BÚSQUEDA (Pura) --- */
+/* --- BARRA DE BUSQUEDA --- */
 .custom-search {
   position: relative;
   width: 100%;
@@ -132,13 +132,13 @@
   box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15)
 }
 
-/* --- LISTA DE TRANSACCIONES (Estilo Oscuro Oran) --- */
+/* TITULO: 'Recients' */
 .section-title {
   color: var(--accent-primary);
   font-size: 1.4rem;
   margin-bottom: 20px;
 }
-
+/* TARJETAS DE TRANSACCION */
 .transaction-card {
   display: flex;
   justify-content: space-between;
@@ -157,13 +157,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transform: translateY(-2px);
 }
-
+/* ICONO, NOMBRE Y SUBTITULO*/
 .card-left {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
+/* Icono */
 .icon-circle-oran {
   width: 40px;
   height: 40px;
@@ -175,27 +175,42 @@
   color: var(--accent-primary);
 }
 
+/* Nombre completo*/
 .info h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: var(--accent-primary);
+  color: var(--text-main);
 }
-
+/* Subtitulo*/
 .info p {
   margin: 0;
-  color: var(--text-main);
+  color: var(--text-muted);
   font-size: 0.85rem;
 }
 
+/* MONTO Y FECHA*/
+.card-right {
+  text-align: right;
+  color: var(--text-main);
+}
+/* Fecha*/
+.card-right p {
+  margin: 0;
+}
+/* Monto */
 .amount-oran {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--accent-primary);
+  color: var(--text-main);
+  margin: 0;
 }
+/* Colores dinamicos para el monto*/
+.positive span { color: var(--success);}
+.negative span { color: var(--text-main); }
 
-/* --- PAGINADOR CUSTOMizado --- */
+/* --- PAGINADOR CUSTOMIZADO --- */
 .custom-paginator {
-  background: transparent !important;
+  background: var(--bg-main) !important;
   color: var(--accent-primary) !important;
   margin-top: 20px;
 }
