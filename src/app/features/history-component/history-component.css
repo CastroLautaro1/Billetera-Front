@@ -1,70 +1,161 @@
-.history-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* FILTROS */
-.filter-row {
+/* --- CONTENEDOR PRINCIPAL (Layout) --- */
+.dashboard-container {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  align-items: center;
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: var(--bg-main); /* Fondo negro profundo */
+  min-height: 100vh;
+  color: white;
 }
 
-.filter-row mat-form-field {
-  flex: 1;
-  min-width: 150px;
+/* --- BARRA LATERAL DE FILTROS --- */
+.filters-sidebar {
+  flex: 0 0 280px; /* Ancho fijo para la sidebar */
+  background-color: var(--bg-card); /* Un gris casi negro para la tarjeta */
+  border: 1px solid var(--border-medium); /* Borde naranja muy sutil */
+  border-radius: 15px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-self: flex-start; /* No se estira verticalmente */
 }
 
-.btn-apply {
-  background-color: transparent !important;
+.sidebar-title {
+  color: var(--accent-primary);
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Amontonados verticalmente como en la imagen */
+}
+
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto; /* Empuja los botones al fondo de la sidebar */
+}
+
+/* --- ESTILOS COMPONENTES MATERIAL (Modo Oscuro/Oran) --- */
+.full-width {
+  width: 100%;
+}
+
+/* Forzar colores en los forms de Material */
+::ng-deep .mat-mdc-form-field-label {
+  color: var(--text-muted) !important;
+}
+
+::ng-deep .mat-mdc-form-field-focus-indicator {
+  background-color: var(--accent-primary) !important;
+}
+
+/* Input y Select text color */
+::ng-deep .mat-mdc-input-element,
+::ng-deep .mat-mdc-select-value {
+  color: var(--text-main) !important;
+}
+
+/* Iconos de Material (Datepicker) */
+::ng-deep .mat-datepicker-toggle button {
   color: var(--accent-primary) !important;
-  border: 1.5px solid var(--accent-primary) !important;
-  border-radius: 10px !important;
-  padding: 0 25px !important;
-  height: 48px;
+}
+
+/* --- BOTONES DE LA SIDEBAR --- */
+.btn-apply {
+  background-color: var(--accent-primary) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  height: 45px !important;
+  font-weight: 600 !important;
+  border: none;
 }
 
 .btn-clear {
-  border-radius: 10px !important;
-  margin-top: 10px;
+  background-color: var(--bg-card);
+  color: var(--accent-primary) !important;
+  border-radius: 8px !important;
+  height: 45px !important;
+  border: 1px solid var(--accent-primary)
 }
 
-/* BÚSQUEDA */
-.search-section {
-  margin: 30px 0;
+.btn-apply:hover {
+  background-color: var(--accent-hover) !important;
 }
 
-.search-input {
-  border-radius: 15px;
+.btn-clear:hover {
+  background-color: var(--bg-hover);
 }
 
-/* TÍTULO SECCIÓN */
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+  flex: 1; /* Toma el resto del espacio */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- BARRA DE BÚSQUEDA (Pura) --- */
+.custom-search {
+  position: relative;
+  width: 100%;
+}
+
+.custom-search mat-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent-primary);
+}
+
+.custom-search input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-primary);
+  border-radius: 10px;
+  padding: 15px 15px 15px 50px;
+  color: var(--text-main);
+  outline: none;
+  font-size: 1rem;
+  max-width: 400px;
+}
+
+.custom-search input:hover {
+  box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15)
+}
+
+/* --- LISTA DE TRANSACCIONES (Estilo Oscuro Oran) --- */
 .section-title {
   color: var(--accent-primary);
-  font-size: 1.8rem;
-  border-bottom: 2px solid var(--border-light);
-  padding-bottom: 10px;
-  margin-bottom: 25px;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
 }
 
-/* CARDS DE TRANSACCIÓN */
 .transaction-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--bg-card);
-  border: 1px solid var(--accent-primary);
-  border-radius: 15px;
-  padding: 15px 25px;
-  margin-bottom: 15px;
-  transition: transform 0.2s;
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  padding: 18px 25px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .transaction-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 102, 0, 0.1);
 }
 
 .card-left {
@@ -73,9 +164,9 @@
   gap: 20px;
 }
 
-.icon-circle {
-  width: 45px;
-  height: 45px;
+.icon-circle-oran {
+  width: 40px;
+  height: 40px;
   border: 1px solid var(--accent-primary);
   border-radius: 50%;
   display: flex;
@@ -92,19 +183,28 @@
 
 .info p {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--text-main);
   font-size: 0.85rem;
 }
 
-.amount {
+.amount-oran {
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--accent-primary);
 }
 
-/* PAGINADOR */
-mat-paginator {
-  background: transparent;
+/* --- PAGINADOR CUSTOMizado --- */
+.custom-paginator {
+  background: transparent !important;
+  color: var(--accent-primary) !important;
   margin-top: 20px;
-  color: var(--text-main);
+}
+
+/* Flechas del paginador */
+::ng-deep .custom-paginator .mat-mdc-icon-button svg {
+  fill: var(--accent-primary) !important;
+}
+
+::ng-deep .custom-paginator .mat-mdc-icon-button:disabled svg {
+  fill: rgba(255, 255, 255, 0.3) !important;
 }

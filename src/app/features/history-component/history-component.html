@@ -1,84 +1,102 @@
-<div class="history-container">
+<div class="dashboard-container">
   
-  <section class="filters-section" [formGroup]="filterForm">
-    <div class="filter-row">
-      <mat-form-field appearance="outline">
+  <aside class="filters-sidebar" [formGroup]="filterForm">
+    <h2 class="sidebar-title">Filtros</h2>
+
+    <div class="filter-group">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Monto mínimo</mat-label>
-        <input matInput type="number" formControlName="minAmount" placeholder="0">
+        <input matInput type="number" formControlName="minAmount" placeholder="$ 0">
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Monto máximo</mat-label>
-        <input matInput type="number" formControlName="maxAmount" placeholder="999999">
+        <input matInput type="number" formControlName="maxAmount" placeholder="$ 999.999">
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="date-range">
-        <mat-label>Rango de fechas</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Inicio">
-          <input matEndDate formControlName="end" placeholder="Fin">
-        </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha inicio</mat-label>
+        <input matInput [matDatepicker]="startPicker" formControlName="start" placeholder="dd/mm/aaaa">
+        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha fin</mat-label>
+        <input matInput [matDatepicker]="endPicker" formControlName="end" placeholder="dd/mm/aaaa">
+        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Tipo</mat-label>
         <mat-select formControlName="type">
-          <mat-option value="">Todos</mat-option>
           <mat-option value="TRANSFER">Transferencia</mat-option>
           <mat-option value="DEPOSIT">Depósito</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <button mat-flat-button class="btn-apply" (click)="applyFilters()">Aplicar</button>
     </div>
 
-    <div class="action-row">
-       <button mat-stroked-button color="warn" class="btn-clear" (click)="clearFilters()">
-        <mat-icon>close</mat-icon> Limpiar
+    <div class="sidebar-actions">
+      <button mat-flat-button class="btn-apply full-width" (click)="applyFilters()">
+        Aplicar
+      </button>
+      <button mat-stroked-button class="btn-clear full-width" (click)="clearFilters()">
+        Limpiar
       </button>
     </div>
-  </section>
+  </aside>
 
-  <section class="search-section">
-    <mat-form-field appearance="outline" class="full-width search-input">
-      <mat-icon matPrefix>search</mat-icon>
-      <input matInput placeholder="Buscar por nombre" (input)="onSearch($event)">
-    </mat-form-field>
-  </section>
-
-  <section class="transactions-section">
-    <h2 class="section-title">Recientes</h2>
+  <section class="main-content">
     
-    <div class="transaction-list">
-      @for (tx of transactions(); track tx.id) {
-        <div class="transaction-card">
-          <div class="card-left">
-            <div class="icon-circle">
-              <mat-icon>arrow_forward</mat-icon>
-            </div>
-            <div class="info">
-              <app-user-fullname-component [accountId]="tx.counterpartyAccountId">   
-              </app-user-fullname-component>
-              <p>{{ tx.transactionType === 'TRANSFER' ? 'Transferencia enviada' : 'Depósito recibido' }}</p>
-            </div>
-          </div>
-          <div class="card-right">
-            <span class="amount">${{ tx.amount | number:'1.2-2' }}</span>
-          </div>
-        </div>
-      }
-    </div>
+    <section class="search-section">
+      <div class="custom-search">
+        <mat-icon>search</mat-icon>
+        <input type="text" placeholder="Buscar por nombre..." (input)="onSearch($event)">
+      </div>
+    </section>
 
-    <mat-paginator 
-        [length]="totalElements()"
-        [pageSize]="10"
-        [pageIndex]="currentPage"
-        [pageSizeOptions]="[5, 10, 25]"
-        (page)="onPageChange($event)"
-        aria-label="Seleccionar página">
-    </mat-paginator>
+    <section class="transactions-section">
+      <h3 class="section-title">Recientes</h3>
+      
+      <div class="transaction-list">
+        @for (tx of transactions(); track tx.id) {
+          <div class="transaction-card">
+            <div class="card-left">
+              <div class="icon-circle-oran">
+                <mat-icon>arrow_forward</mat-icon>
+              </div>
+              <div class="info">
+                <h3>
+                  <app-user-fullname-component 
+                  [accountId]="tx.counterpartyAccountId === userAccount()?.id ? tx.originAccountId : tx.counterpartyAccountId">
+                  </app-user-fullname-component>
+                </h3>
+                @if (tx.transactionType === 'TRANSFER') {
+                  @if (tx.counterpartyAccountId === userAccount()?.id) {
+                    <p>Transferencia recibida</p>
+                  } @else {
+                    <p>Transferencia enviada</p>
+                  }
+                }
+              </div>
+            </div>
+            <div class="card-right">
+              <span class="amount-oran">${{ tx.amount | number:'1.2-2' }}</span>
+            </div>
+          </div>
+        }
+      </div>
+
+      <mat-paginator 
+          [length]="totalElements()"
+          [pageSize]="pageSize"
+          [pageIndex]="currentPage"
+          (page)="onPageChange($event)"
+          hidePageSize
+          aria-label="Seleccionar página">
+      </mat-paginator>
+    </section>
   </section>
 
 </div>

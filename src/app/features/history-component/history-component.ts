@@ -10,6 +10,8 @@ import { TransactionService } from '../../core/services/transaction-service';
 import { Transaction } from '../../shared/models/Transaction';
 import { CommonModule } from '@angular/common';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
+import { AccountService } from '../../core/services/account-service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-history-component',
@@ -34,12 +36,19 @@ import { UserFullnameComponent } from '../../shared/components/user-fullname-com
 export class HistoryComponent {
 
   private _transaction = inject(TransactionService);
+  private _userAccount = inject(AccountService);
   private _fb = inject(FormBuilder);
 
   transactions = signal<Transaction[]>([]);
   totalElements = signal<number>(0);
   currentPage = 0;
   pageSize = 10;
+
+  // Obtengo el Id de la cuenta del usuario logueado para saber cuando es destinatario y cuando remitente
+  userAccount = toSignal(
+      this._userAccount.getProfile(),
+      {initialValue : undefined}
+  );
 
   filterForm = this._fb.group({
     minAmount: [null, [Validators.min(0)]],
