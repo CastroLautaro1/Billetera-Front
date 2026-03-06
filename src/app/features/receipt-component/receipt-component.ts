@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, LOCALE_ID, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionService } from '../../core/services/transaction-service';
@@ -8,6 +8,7 @@ import { AccountService } from '../../core/services/account-service';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { DatePipe } from '@angular/common';
 
 // Configuración obligatoria para que pdfmake pueda usar sus fuentes por defecto
 const pdf = pdfMake as any;
@@ -16,7 +17,10 @@ pdf.vfs = fonts.pdfMake ? fonts.pdfMake.vfs : fonts.vfs;
 
 @Component({
   selector: 'app-receipt-component',
-  imports: [MatIcon],
+  imports: [MatIcon, DatePipe],
+  providers: [{
+    provide: LOCALE_ID, useValue: 'es-AR'
+  }],
   templateUrl: './receipt-component.html',
   styleUrl: './receipt-component.css',
 })

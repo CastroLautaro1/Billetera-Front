@@ -1,5 +1,7 @@
+
 .amount-container {
-  max-width: 600px;
+  width: 100%;
+  max-width: 550px;
   margin: 0 auto;
   padding: 30px 20px;
   background-color: var(--bg-main);
@@ -7,6 +9,7 @@
   display: flex;
   flex-direction: column;
 }
+
 
 .header-actions {
   margin-bottom: 25px;
@@ -26,7 +29,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 80px;
+  /*min-height: 80px;*/
 }
 
 .balance-label {
@@ -107,6 +110,7 @@
   color: var(--text-main);
   margin: 0;
   pointer-events: none; /* Deja que los clics traspasen hacia el input */
+  letter-spacing: -2px;
 }
 
 /* Color gris si está en $0 */
@@ -223,6 +227,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  letter-spacing: 1px;
 }
 
 .btn-outline-primary:hover {

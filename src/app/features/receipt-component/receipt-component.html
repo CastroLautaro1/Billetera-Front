@@ -10,7 +10,11 @@
     </div>
 
     <h2 class="receipt-title">Comprobante de transferencia</h2>
-    <p class="receipt-date">Viernes, 20 de febrero de 2026 a las 16:54 hs</p>
+    <p class="receipt-date">
+      {{ transactionData()?.timestamp| date: "EEEE, d 'de' MMMM 'de' y" : 'es-AR' }} 
+      a las 
+      {{ transactionData()?.timestamp| date: "HH:mm" }} hs
+    </p>
 
     <div class="divider"></div>
 
