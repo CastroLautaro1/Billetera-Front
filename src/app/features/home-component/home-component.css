@@ -1,6 +1,6 @@
 .dashboard-container {
   padding: 20px;
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
   background-color: var(--bg-main);
   min-height: 100vh;
@@ -112,10 +112,12 @@
   display: flex;
   align-items: center;
   font-size: 0.9rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .view-all:hover {
   color: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
 /* Items de Transacción */

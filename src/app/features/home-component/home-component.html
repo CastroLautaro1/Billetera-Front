@@ -3,11 +3,15 @@
     <div class="balance-header">
       <span>Hola, {{ userData()?.firstname }}</span>
       <div class="balance-actions">
-        <mat-icon>visibility</mat-icon>
+        <mat-icon (click)="toggleAmount()">
+          {{ amountVisible ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
         <mat-icon>person_outline</mat-icon>
       </div>
     </div>
-    <div class="balance-amount">${{ userAccount()?.balance }}</div>
+    <div class="balance-amount">
+      $ {{ amountVisible ? (userAccount()?.balance | number:'1.2-2') : '******' }}
+    </div>
   </div>
 
   <div class="actions-grid">
