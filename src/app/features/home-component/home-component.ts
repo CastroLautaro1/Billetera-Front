@@ -41,6 +41,13 @@ export class HomeComponent {
     {initialValue : undefined}
   )
 
+  // Metodo para determinar si una transaccion es un ingreso o egreso
+  isEntry(t: any): boolean {
+    if (t.transactionType === 'DEPOSIT') return true;
+
+    return t.transactionType === 'TRANSFER' && t.counterpartyAccountId === this.userAccount()?.id;
+  }
+
   openUserModal() {
     this._dialog.open(UserModalComponent, {
       width: '450px',          

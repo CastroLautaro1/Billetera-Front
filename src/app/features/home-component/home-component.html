@@ -32,10 +32,10 @@
   <div class="activity-section">
     <div class="section-header">
       <h2>Actividad reciente</h2>
-      <a href="/history" class="view-all" (click)="goHistory()">
+      <p class="view-all" (click)="goHistory()">
         Ver todo 
         <mat-icon>chevron_right</mat-icon>
-      </a>
+      </p>
     </div>
 
     <div class="transaction-list">
@@ -43,7 +43,8 @@
         <div class="transaction-item">
           <div class="transaction-info">
             <div class="icon-box" [class.deposit]="t.transactionType === 'DEPOSIT'">
-              <mat-icon>{{ t.transactionType === 'DEPOSIT' ? 'add' : 'send' }}</mat-icon>
+              
+              <mat-icon>{{ isEntry(t) ? 'south_west' : 'send_money'}}</mat-icon>
             </div>
             <div class="details">
               <p class="title">
@@ -52,24 +53,15 @@
                 </app-user-fullname-component>
               </p>
               @if (t.transactionType === 'TRANSFER') {
-                @if (t.counterpartyAccountId === userAccount()?.id) {
-                  <p class="subtitle">Transferencia recibida</p>
-                } @else {
-                  <p class="subtitle">Transferencia enviada</p>
-                }
+                <p class="subtitle">{{ isEntry(t) ? 'Transferencia recibida' : 'Transferencia enviada' }}</p>
               }
             </div>
           </div>
 
-          <div class="transaction-amount" [class.positive]="t.transactionType === 'DEPOSIT'">
-            @if (t.transactionType === 'DEPOSIT') {
-              <p>+${{ t.amount }}</p>
-            }
-            @if (t.transactionType === 'TRANSFER') {
-              <p>
-                {{ t.counterpartyAccountId === userAccount()?.id ? '+' : '-'}}${{t.amount}}
-              </p>
-            }
+          <div class="transaction-amount" [class.positive]="isEntry(t)">
+            <p>
+              {{ isEntry(t) ? '+' : '-' }}${{ t.amount }}
+            </p>
             <span>{{ t.timestamp | date:'dd MMM' }}</span>
           </div>
         </div>

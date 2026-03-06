@@ -114,6 +114,7 @@
   align-items: center;
   font-size: 0.9rem;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .view-all:hover {
@@ -162,7 +163,6 @@
 .details .subtitle {
   color: var(--text-muted);
   font-size: 0.85rem;
-  text-transform: lowercase;
 }
 
 /* Bloque del monto alineado a la derecha */
