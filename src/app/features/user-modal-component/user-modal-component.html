@@ -1,0 +1,45 @@
+<div class="modal-wrapper">
+  <button mat-icon-button class="close-btn" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="header">
+    <div class="title-row">
+      <mat-icon>person</mat-icon>
+      <h3>Mis Datos</h3>
+    </div>
+    <p class="subtitle">Información de tu cuenta</p>
+  </div>
+
+  <mat-dialog-content class="info-list">
+    <div class="data-item">
+      <label>Nombre Completo</label>
+      <div class="data-box">{{ userData()?.firstname }} {{ userData()?.lastname }}</div>
+    </div>
+
+    <div class="data-item">
+      <label>Email</label>
+      <div class="data-box">{{ userData()?.email }}</div>
+    </div>
+
+    <div class="data-item">
+      <label>CVU</label>
+      <div class="copy-group">
+        <div class="data-box cvu-text">{{ accountData()?.cvu }}</div>
+        <button mat-icon-button (click)="copyToClipboard(accountData()?.cvu, 'CVU')" matTooltip="Copiar CVU">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="data-item">
+      <label>Alias</label>
+      <div class="copy-group">
+        <div class="data-box alias-text">{{ accountData()?.alias }}</div>
+        <button mat-icon-button (click)="copyToClipboard(accountData()?.alias, 'Alias')" matTooltip="Copiar Alias">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-dialog-content>
+</div>

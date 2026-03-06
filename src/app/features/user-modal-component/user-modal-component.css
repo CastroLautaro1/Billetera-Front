@@ -1,0 +1,111 @@
+/* Quitamos los bordes y paddings que Material pone por defecto */
+::ng-deep .custom-modal-container .mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: var(--bg-card) !important;
+  border-radius: 20px !important;
+  padding: 0 !important;
+}
+
+.modal-wrapper {
+    position: relative;
+  padding: 24px;
+  background-color: var(--bg-card);
+  color: white;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: var(--text-muted);
+  z-index: 10;
+  background-color: transparent;
+  border: none;
+}
+
+.close-btn:hover {
+  color: var(--accent-primary);
+}
+
+.header {
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 102, 0, 0.2);
+  padding-bottom: 15px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+}
+
+.title-row mat-icon {
+  font-size: 24px;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden !important; /* Evita scrolls raros si el ancho es fijo */
+    padding: 0px 24px 20px 24px;
+}
+
+.data-item label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.data-box {
+  background-color: var(--bg-main);
+  padding: 12px 15px;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  word-break: break-all; /* Por si el CVU es muy largo */
+}
+
+.cvu-text {
+  font-family: monospace; /* Los números largos se leen mejor así */
+  letter-spacing: 1px;
+}
+
+.alias-text {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.copy-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.copy-group .data-box {
+  flex: 1; /* El dato ocupa todo el espacio posible */
+}
+
+.copy-group button {
+  color: var(--accent-primary);
+  background-color: rgba(255, 102, 0, 0.1);
+  border-radius: 8px;
+  border: none;
+  padding: 7px;
+}
+
+.copy-group button:hover {
+  background-color: var(--accent-primary);
+  color: white;
+}
