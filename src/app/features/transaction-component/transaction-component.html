@@ -1,41 +1,65 @@
-<div class="transaction-wrapper">
-    <div class="header">
-        <mat-icon>check_circle</mat-icon>
+<div class="receipt-view-container">
+
+  <div class="receipt-card">
+    
+    <div class="receipt-header">
+      <div class="icon-circle">
+        <mat-icon class="check-icon">check</mat-icon>
+      </div>
     </div>
 
     <div class="main-info">
-        <h3 class="title">Transferencia exitosa</h3>
-        <p>
-            {{ transaction()?.timestamp| date: "EEEE, d 'de' MMMM 'de' y" : 'es-AR' }} 
-            -
-            {{ transaction()?.timestamp| date: "HH:mm" }} hs
-        </p>
+      <h2 class="title">Transferencia exitosa</h2>
+      <p class="date">
+        {{ transaction()?.timestamp | date: "EEEE, d 'de' MMMM 'de' y - HH:mm" : 'es-AR' }}
+      </p>
 
-        <p>Monto</p>
-        <h2>${{ transaction()?.amount }}</h2>
+      <p class="amount-label">Monto</p>
+      <h1 class="amount-value">${{ transaction()?.amount }}</h1>
+    </div>
+
+    <hr class="divider">
+
+    <div class="accounts-section">
+      
+      <div class="account-card">
+        <div class="account-header">
+          <mat-icon class="arrow-icon">arrow_upward</mat-icon>
+          <span>Desde</span>
+        </div>
+        <p class="account-name">{{ originAccount()?.firstname }} {{ originAccount()?.lastname }}</p>
+        <p class="account-detail">CVU: {{ originAccount()?.cvu }}</p>
+      </div>
+
+      <div class="account-card">
+        <div class="account-header">
+          <mat-icon class="arrow-icon downward">arrow_downward</mat-icon>
+          <span>Para</span>
+        </div>
+        <p class="account-name">{{ counterpartyAccount()?.firstname }} {{ counterpartyAccount()?.lastname }}</p> 
+        <p class="account-detail">CVU: {{ counterpartyAccount()?.cvu }}</p>
+      </div>
 
     </div>
 
-    <div class="account-info">
-        <p>Cuenta de origen</p>
-        <p>{{ originAccount()?.firstname}} {{ originAccount()?.lastname}}</p>
-        <p>CVU: {{ originAccount()?.cvu }}</p>
+    <div class="details-section">
+      <div class="detail-group">
+        <p class="detail-label">Referencia</p>
+        <p class="detail-value">{{ transaction()?.id }}</p>
+      </div>
+      <div class="detail-group">
+        <p class="detail-label">Tipo</p>
+        <p class="detail-value">Transferencia enviada</p>
+      </div>
     </div>
 
-    <div class="account-info">
-        <p>Cuenta de origen</p>
-        <p>{{ originAccount()?.firstname}} {{ originAccount()?.lastname}}</p>
-        <p>CVU: {{ originAccount()?.cvu }}</p>
+    <hr class="divider">
+
+    <div class="receipt-actions">
+      <button mat-flat-button class="btn-download">
+        <mat-icon>download</mat-icon> Descargar comprobante
+      </button>
     </div>
 
-    <div class="details">
-        <p>Detalle: </p>
-        <p>{{ transaction()?.details }}</p>
-    </div>
-
-    <div class="download">
-        <button>
-            Descargar comprobante
-        </button>
-    </div>
+  </div>
 </div>

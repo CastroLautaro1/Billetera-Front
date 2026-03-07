@@ -1,83 +1,202 @@
-.transaction-wrapper {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-medium);
-    border-radius: 15px;
-    color: var(--text-main);
-    width: 500px;
+/* Contenedor general para centrar todo */
+.receipt-view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
-.header {
-    background-color: var(--accent-primary);
-    height: 100px;
-    border-radius: 15px 15px 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* Enlace superior */
+.top-action {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
 }
 
-.header mat-icon {
-    color: var(--bg-card);
+/* --- TARJETA PRINCIPAL --- */
+.receipt-card {
+  background-color: var(--bg-card); /* Forzamos blanco para el comprobante */
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra para que flote */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Importante para que el header naranja no pierda las curvas */
 }
 
+/* --- ENCABEZADO Y CÍRCULO SUPERPUESTO --- */
+.receipt-header {
+  background-color: var(--accent-primary); /* Naranja Oran */
+  height: 130px;
+  position: relative; /* CLAVE para el círculo */
+}
+
+.icon-circle {
+  position: absolute;
+  bottom: -35px; /* Lo bajamos exactamente la mitad de su altura */
+  left: 50%;
+  transform: translateX(-50%); /* Lo centra horizontalmente */
+  width: 70px;
+  height: 70px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.check-icon {
+  color: var(--success); /* Verde éxito */
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  font-weight: 800;
+}
+
+/* --- INFORMACIÓN PRINCIPAL --- */
 .main-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid var(--accent-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px 20px 20px; /* Padding top grande para hacerle lugar al círculo */
+  text-align: center;
 }
 
-.main-info h3 {
-    font-size: 1.2rem;
+.title {
+  color: var(--text-main); /* Azul oscuro/Casi negro */
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
 }
 
-.main-info p {
-    color: var(--text-muted);
-    margin: 0;
+.date, .amount-label {
+  color: var(--text-muted); /* Gris texto secundario */
+  font-size: 0.85rem;
+  margin: 0;
 }
 
-.main-info h2 {
-    color: var(--accent-primary);
-    font-size: 2.5rem;
+.amount-label {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-.account-info {
-    background-color: var(--bg-main);
-    border: 1px solid var(--border-medium);
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 450px;
-    padding: 10px;
-    margin: 10px;
+.amount-value {
+  color: var(--accent-primary);
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0;
 }
 
-.account-info p {
-    margin: 2px;
+/* --- DIVISORES --- */
+.divider {
+  border: none;
+  border-top: 1px solid var(--text-muted); /* Gris muy claro */
+  margin: 0 30px;
 }
 
-.details {
-    border-bottom: 2px solid var(--accent-primary);
-    font-size: 1.3rem;
-    padding: 15px;
+/* --- SECCIÓN DE CUENTAS (Desde/Para) --- */
+.accounts-section {
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.download {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+.account-card {
+  background-color: var(--bg-main); /* Fondo gris súper sutil */
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 15px;
+  text-align: left;
 }
 
-.download button {
-    background-color: var(--accent-primary);
-    color: white;
-    border: none;
-    border-radius: 15px;
-    height: 50px;
-    width: 200px;
+.account-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
 
+.arrow-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.arrow-icon.downward {
+  color: var(--danger); /* Rojo si querés diferenciar la salida, sino dejalo naranja */
+}
+
+.account-name {
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+}
+
+.account-detail {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 2px 0;
+}
+
+/* --- DETALLES EXTRA --- */
+.details-section {
+  padding: 0 30px 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.detail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.detail-label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.detail-value {
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.receipt-actions {
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-download {
+  background-color: var(--accent-primary) !important;
+  color: white !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  border: none;
+  font-size: 1rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-download:hover {
+    cursor: pointer;
+    background-color: var(--accent-hover);
 }
