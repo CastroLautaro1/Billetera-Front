@@ -1,0 +1,41 @@
+<div class="transaction-wrapper">
+    <div class="header">
+        <mat-icon>check_circle</mat-icon>
+    </div>
+
+    <div class="main-info">
+        <h3 class="title">Transferencia exitosa</h3>
+        <p>
+            {{ transaction()?.timestamp| date: "EEEE, d 'de' MMMM 'de' y" : 'es-AR' }} 
+            -
+            {{ transaction()?.timestamp| date: "HH:mm" }} hs
+        </p>
+
+        <p>Monto</p>
+        <h2>${{ transaction()?.amount }}</h2>
+
+    </div>
+
+    <div class="account-info">
+        <p>Cuenta de origen</p>
+        <p>{{ originAccount()?.firstname}} {{ originAccount()?.lastname}}</p>
+        <p>CVU: {{ originAccount()?.cvu }}</p>
+    </div>
+
+    <div class="account-info">
+        <p>Cuenta de origen</p>
+        <p>{{ originAccount()?.firstname}} {{ originAccount()?.lastname}}</p>
+        <p>CVU: {{ originAccount()?.cvu }}</p>
+    </div>
+
+    <div class="details">
+        <p>Detalle: </p>
+        <p>{{ transaction()?.details }}</p>
+    </div>
+
+    <div class="download">
+        <button>
+            Descargar comprobante
+        </button>
+    </div>
+</div>
