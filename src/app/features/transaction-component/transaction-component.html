@@ -44,20 +44,27 @@
 
     <div class="details-section">
       <div class="detail-group">
+        <p class="detail-label">Detalle</p>
+        <p class="detail-value">{{ transaction()?.details}}</p>
+      </div>
+      <div class="detail-group">
         <p class="detail-label">Referencia</p>
-        <p class="detail-value">{{ transaction()?.id }}</p>
+        <p class="detail-value">{{ formmatedReference(transaction()?.id )}}</p>
       </div>
       <div class="detail-group">
         <p class="detail-label">Tipo</p>
-        <p class="detail-value">Transferencia enviada</p>
+        <p class="detail-value">
+          {{ isEntry() ? 'Transferencia recibida' : 'Transferencia enviada' }}
+        </p>
       </div>
     </div>
 
     <hr class="divider">
 
     <div class="receipt-actions">
-      <button mat-flat-button class="btn-download">
-        <mat-icon>download</mat-icon> Descargar comprobante
+      <button mat-flat-button class="btn-download" (click)="downloadReceipt()">
+        <mat-icon>download</mat-icon> 
+        {{ isDownloading ? 'Generando PDF...' : 'Descargar comprobante'}}
       </button>
     </div>
 
