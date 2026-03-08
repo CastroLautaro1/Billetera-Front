@@ -1,20 +1,18 @@
-import { Component, inject, Pipe } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { AccountService } from '../../core/services/account-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { UserService } from '../../core/services/user-service';
 import { TransactionService } from '../../core/services/transaction-service';
-import { MatMenuTrigger } from "../../../../node_modules/@angular/material/menu/index";
 import { CommonModule, DatePipe } from '@angular/common';
-import { map, tap } from 'rxjs';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UserModalComponent } from '../user-modal-component/user-modal-component';
 
 @Component({
   selector: 'app-home-component',
-  imports: [MatIcon, DatePipe, UserFullnameComponent, CommonModule],
+  imports: [MatIcon, DatePipe, UserFullnameComponent, CommonModule, RouterLink],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css',
 })

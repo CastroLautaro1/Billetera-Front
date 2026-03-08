@@ -19,7 +19,7 @@
       <div class="action-icon"><mat-icon>add</mat-icon></div>
       <span>Depositar</span>
     </div>
-    <div class="action-item" (click)="toTransfer()">
+    <div class="action-item" [routerLink]="['/transferContact']">
       <div class="action-icon"><mat-icon>send</mat-icon></div>
       <span>Transferir</span>
     </div>
@@ -32,7 +32,7 @@
   <div class="activity-section">
     <div class="section-header">
       <h2>Actividad reciente</h2>
-      <p class="view-all" (click)="goHistory()">
+      <p class="view-all" [routerLink]="['/history']">
         Ver todo 
         <mat-icon>chevron_right</mat-icon>
       </p>
@@ -40,7 +40,7 @@
 
     <div class="transaction-list">
       @for (t of transactionHistory()?.content; track t.id) {
-        <div class="transaction-item">
+        <div class="transaction-item" [routerLink]="['/transaction', t.id]">
           <div class="transaction-info">
             <div class="icon-box" [class.deposit]="t.transactionType === 'DEPOSIT'">
               
@@ -66,7 +66,13 @@
           </div>
         </div>
       } @empty {
-        <p class="no-data">No hay transacciones aún</p>
+        <div class="empty-state">
+          <div class="empty-icon-wrapper">
+            <mat-icon>receipt_long</mat-icon>
+          </div>
+          <h4 class="empty-title">Aún no tenés movimientos</h4>
+          <p class="empty-subtitle">Tus transferencias y depósitos aparecerán acá.</p>
+        </div>
       }
     </div>
   </div>
