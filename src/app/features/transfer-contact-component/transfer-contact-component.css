@@ -75,15 +75,20 @@
   position: relative;
 }
 
-/* El truco para la línea naranja que ocupa solo un tercio */
+/* Linea gradiente debajo del H2*/
 .contacts-section h2::after {
   content: '';
   position: absolute;
   bottom: -1px;
   left: 0;
-  width: 250px;
+  width: 100%; 
   height: 2px;
-  background-color: var(--accent-primary);
+  background: linear-gradient(
+    to right, 
+    transparent 0%, 
+    var(--accent-primary) 50%, 
+    transparent 100%
+  );
 }
 
 /* Lista y Tarjetas */
@@ -91,4 +96,47 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+
+/* --- EMPTY STATE CONTACTOS --- */
+.empty-contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-contacts .empty-icon-wrapper {
+  background-color: var(--accent-light);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.empty-contacts .empty-icon-wrapper mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  color: var(--accent-primary); /* Naranja */
+}
+
+.empty-contacts .empty-title {
+  color: var(--text-main);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.empty-contacts .empty-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  max-width: 320px;
+  line-height: 1.4;
 }

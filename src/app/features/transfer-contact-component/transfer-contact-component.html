@@ -35,7 +35,13 @@
                     >
                 </app-contact-card-component>
             } @empty {
-                <p>No tienes contactos recientes.</p>
+                <div class="empty-contacts">
+                    <div class="empty-icon-wrapper">
+                        <mat-icon>person_search</mat-icon>
+                    </div>
+                    <h4 class="empty-title">Sin contactos recientes</h4>
+                    <p class="empty-subtitle">Buscá un Alias o CVU en la barra superior para realizar tu primera transferencia.</p>
+                </div>
             }
         </div>
     }
