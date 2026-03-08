@@ -1,6 +1,6 @@
 <div class="amount-container">
   <div class="header-actions">
-    <button mat-icon-button class="back-btn" (click)="goBack()">
+    <button mat-icon-button class="back-btn" [routerLink]="['/transferContact']">
       <mat-icon>arrow_back</mat-icon>
     </button>
   </div>
@@ -35,12 +35,19 @@
   </div>
 
   <div class="amount-form">
-    <input
-      type="text"
-      class="custom-input detail-input"
-      placeholder="Ingresar detalle (opcional)"
-      (input)="updateDetails($event)"
-    />
+    
+    <p class="detail-label">Motivo de la transferencia (opcional)</p>
+  
+    <div class="chips-container">
+      @for (detail of predefinedDetails; track detail) {
+        <button 
+          class="detail-chip" 
+          [class.active]="selectedDetail === detail"
+          (click)="selectDetail(detail)">
+          {{ detail }}
+        </button>
+      }
+    </div> 
 
     <div class="action-container">
       <button class="btn-outline-primary" 

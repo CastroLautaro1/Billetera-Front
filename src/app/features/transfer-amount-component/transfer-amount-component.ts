@@ -1,8 +1,8 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AccountService } from '../../core/services/account-service';
 import { filter, map, switchMap } from 'rxjs';
 import { TransactionService } from '../../core/services/transaction-service';
@@ -10,7 +10,7 @@ import { TransactionDTO } from '../../shared/models/TransactionDTO';
 
 @Component({
   selector: 'app-transfer-amount-component',
-  imports: [MatIcon, MatIconButton],
+  imports: [MatIcon, MatIconButton, RouterLink],
   templateUrl: './transfer-amount-component.html',
   styleUrl: './transfer-amount-component.css',
 })
@@ -37,6 +37,18 @@ export class TransferAmountComponent {
     this._account.getProfile(),
     { initialValue : undefined }
   )
+
+  predefinedDetails: string[] = ['Varios','Compra','Comida', 'Alquiler', 'Servicios', 'Regalos', 'Deudas'];
+
+  selectedDetail: string = '';
+
+  selectDetail(detail: string) {
+    if (this.selectedDetail === detail) {
+      this.selectedDetail = ''; // Lo deselecciona
+    } else {
+      this.selectedDetail = detail; // Lo selecciona
+    }
+  }
   
   // signals para el monto y los detalles
   rawAmount = signal<string>('');
@@ -52,6 +64,12 @@ export class TransferAmountComponent {
     const input = event.target as HTMLInputElement;
     let value = input.value;
 
+    // 3. Si tiene más de 9 caracteres, lo cortamos "a la fuerza"
+    if (value.length > 9) {
+      value = value.slice(0, 9);
+      input.value = value; // Actualizamos lo que ve el usuario en pantalla
+    }
+
     // si el usuario pone mas de 2 decimales entonces se recorta
     if (value.includes('.')) {
       const parts = value.split('.');
@@ -62,11 +80,6 @@ export class TransferAmountComponent {
     }
 
     this.rawAmount.set(value);
-  }
-
-  updateDetails(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.transferDetails.set(input.value);
   }
 
   // computed para formatear como se ve el monto
@@ -113,21 +126,17 @@ export class TransferAmountComponent {
     const dto : TransactionDTO = {
       destination: destination,
       amount: this.amount()!,
-      details: this.transferDetails()
+      details: this.selectedDetail
     }
 
     this._transaction.makeTransfer(dto).subscribe({
       next: (response) => {
         console.log("Transaccion completada: ", response);
-        this._router.navigate(['receipt', response.id]);
+        this._router.navigate(['receipt', response.id], { replaceUrl : true });
       },
       error: (err) => {
         console.error("Error al realizar la transferencia: ", err);
       }
     })
-  }
-
-  goBack() {
-    this._router.navigate(['transferContact']);
   }
 }
