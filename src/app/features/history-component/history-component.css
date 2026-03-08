@@ -223,3 +223,49 @@
 ::ng-deep .custom-paginator .mat-mdc-icon-button:disabled svg {
   fill: rgba(255, 255, 255, 0.3) !important;
 }
+
+/* --- EMPTY STATE HISTORIAL --- */
+.empty-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  background-color: var(--bg-card);
+  border: 2px dashed var(--border-medium); 
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.empty-icon-wrapper {
+  background-color: var(--accent-light); 
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.empty-icon-wrapper mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--accent-primary); 
+}
+
+.empty-title {
+  color: var(--text-main);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.empty-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+  max-width: 350px; 
+}

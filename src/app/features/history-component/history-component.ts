@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
 import { AccountService } from '../../core/services/account-service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history-component',
@@ -38,6 +39,7 @@ export class HistoryComponent {
   private _transaction = inject(TransactionService);
   private _userAccount = inject(AccountService);
   private _fb = inject(FormBuilder);
+  private _router = inject(Router);
 
   transactions = signal<Transaction[]>([]);
   totalElements = signal<number>(0);
@@ -111,6 +113,10 @@ export class HistoryComponent {
     if (t.transactionType === 'DEPOSIT') return true;
 
     return t.transactionType === 'TRANSFER' && t.counterpartyAccountId === this.userAccount()?.id;
+  }
+
+  goTransaction(id: number) {
+    this._router.navigate(['transaction', id]);
   }
 
 

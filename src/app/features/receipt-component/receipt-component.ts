@@ -5,15 +5,9 @@ import { TransactionService } from '../../core/services/transaction-service';
 import { filter, map, switchMap } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AccountService } from '../../core/services/account-service';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { DatePipe } from '@angular/common';
+import { FileDownloadService } from '../../core/services/file-download-service';
 
-// Configuración obligatoria para que pdfmake pueda usar sus fuentes por defecto
-const pdf = pdfMake as any;
-const fonts = pdfFonts as any;
-pdf.vfs = fonts.pdfMake ? fonts.pdfMake.vfs : fonts.vfs;
 
 @Component({
   selector: 'app-receipt-component',
@@ -30,6 +24,7 @@ export class ReceiptComponent {
   private _transaction = inject(TransactionService);
   private _account = inject(AccountService);
   private _router = inject(Router);
+  private _fileDownload = inject(FileDownloadService);
 
   isDownloading = signal<boolean>(false);
 
@@ -62,12 +57,10 @@ export class ReceiptComponent {
     { initialValue : undefined }
   );
 
-  
   shareReceipt() {
-
+    
   }
 
-  
   downloadPDF() {
     const txId = this.transactionData()?.id;
     
@@ -80,30 +73,12 @@ export class ReceiptComponent {
 
     this._transaction.downloadReceiptPdf(txId).subscribe({
       next: (blob: Blob) => {
-        // 1. Creamos una URL temporal en el navegador para el archivo (Blob)
-        const fileUrl = window.URL.createObjectURL(blob);
-
-        // 2. Creamos un elemento <a> invisible HTML
-        const anchor = document.createElement('a');
-        anchor.href = fileUrl;
-        
-        // 3. Le ponemos el nombre con el que se va a guardar en la PC del usuario
-        anchor.download = `Comprobante_Oran_${txId}.pdf`;
-
-        // 4. Lo agregamos al DOM, simulamos el click y lo borramos rápidamente
-        document.body.appendChild(anchor);
-        anchor.click();
-        document.body.removeChild(anchor);
-        
-        // 5. Liberamos la memoria de la URL temporal
-        window.URL.revokeObjectURL(fileUrl);
+        this._fileDownload.downloadBlobAsFile(blob, `Comprobante_Oran_${txId}.pdf`);
       },
       error: (error) => {
-        console.error('Error al descargar el comprobante desde el servidor', error)
-        // Acá podrías mostrar un cartelito (SnackBar) diciendo "Error al descargar"
+        console.error('Error al descargar el comprobante desde el servidor', error);
       },
       complete: () => {
-        // Apagamos el spinner de carga
         this.isDownloading.set(false);
       }
     });

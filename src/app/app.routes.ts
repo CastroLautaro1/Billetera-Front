@@ -6,6 +6,7 @@ import { TransferAmountComponent } from './features/transfer-amount-component/tr
 import { ReceiptComponent } from './features/receipt-component/receipt-component';
 import { HistoryComponent } from './features/history-component/history-component';
 import { UserModalComponent } from './features/user-modal-component/user-modal-component';
+import { TransactionComponent } from './features/transaction-component/transaction-component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -13,5 +14,6 @@ export const routes: Routes = [
     {path: 'transferContact', component: TransferContactComponent},
     {path: 'transferAmount/:id', component: TransferAmountComponent},
     {path: 'receipt/:id', component: ReceiptComponent},
-    {path: 'history', component: HistoryComponent}
+    {path: 'history', component: HistoryComponent},
+    {path: 'transaction/:id', component: TransactionComponent}
 ];

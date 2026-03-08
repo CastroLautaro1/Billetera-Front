@@ -71,14 +71,14 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* --- BASE DEL SNACKBAR ORAN --- */
+
+/* --- Estilos del SnackBar --- */
 .oran-snackbar .mdc-snackbar__surface {
   background-color: var(--bg-card) !important; /* Fondo oscuro */
   border-radius: 12px !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
 }
-
-/* --- VARIANTES DE COLORES --- */
+/* --- Colores del SnackBar --- */
 
 /* Exito (Naranaja) */
 .snack-success .mdc-snackbar__surface { border: 1px solid var(--accent-primary) !important; }

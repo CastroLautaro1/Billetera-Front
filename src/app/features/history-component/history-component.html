@@ -33,6 +33,7 @@
         <mat-select formControlName="type">
           <mat-option value="TRANSFER">Transferencia</mat-option>
           <mat-option value="DEPOSIT">Depósito</mat-option>
+          <mat-option value="WITHDRAWL">Retiro</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -61,7 +62,7 @@
       
       <div class="transaction-list">
         @for (tx of transactions(); track tx.id) {
-          <div class="transaction-card">
+          <div class="transaction-card" (click)="goTransaction(tx.id)">
             <div class="card-left">
               <div class="icon-circle-oran">
                 <mat-icon>{{ isEntry(tx) ? 'south_west' : 'send' }}</mat-icon>
@@ -84,17 +85,28 @@
               <p>{{ tx.timestamp | date:'dd MMM'}}</p>
             </div>
           </div>
+        } @empty {
+          <div class="empty-history">
+            <div class="empty-icon-wrapper">
+              <mat-icon>manage_search</mat-icon>
+            </div>
+            <h4 class="empty-title">No encontramos transacciones</h4>
+            <p class="empty-subtitle">Aún no tenés movimientos registrados o no coinciden con tu búsqueda.</p>
+          </div>
         }
       </div>
 
-      <mat-paginator 
+      @if(totalElements() > 0) {
+        <mat-paginator 
           [length]="totalElements()"
           [pageSize]="pageSize"
           [pageIndex]="currentPage"
           (page)="onPageChange($event)"
           hidePageSize
           aria-label="Seleccionar página">
-      </mat-paginator>
+        </mat-paginator>
+      }
+      
     </section>
   </section>
 
