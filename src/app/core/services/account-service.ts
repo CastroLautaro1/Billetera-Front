@@ -23,4 +23,11 @@ export class AccountService {
   getByDestination(destination: string) {
     return this.http.get<AccountPublicData>(`${this.API_URL}/search/${destination}`);
   }
+
+  // Endpoint para actualizar solamente el alias
+  updateAlias(alias: string) {
+    const dto = {alias : alias}
+    return this.http.put(`${this.API_URL}/alias`, dto);
+  }
+
 }
