@@ -1,0 +1,78 @@
+<div class="profile-container">
+  
+  <div class="header">
+    <button class="btn-back" [routerLink]="['/']">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h2><mat-icon class="title-icon">person_outline</mat-icon> Editar perfil</h2>
+  </div>
+
+  <div class="profile-card">
+    
+    <mat-tab-group class="oran-tabs" mat-stretch-tabs="false" mat-align-tabs="start">
+      
+      <mat-tab label="Editar datos">
+        <form class="profile-form tab-content" [formGroup]="formData">
+
+          <div class="input-row">
+            
+            <div class="input-group">
+              <label>Nombre/s</label>
+              <input type="text" class="oran-input" placeholder="Juan" formControlName="firstname">
+            </div>
+            
+            <div class="input-group">
+              <label>Apellido/s</label>
+              <input type="text" class="oran-input" placeholder="Perez" formControlName="lastname">
+            </div>
+          
+        </div>
+
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" class="oran-input" placeholder="juan.perez@email.com" formControlName="email">
+          </div>
+          
+          <div class="input-group">
+            <label>Alias</label>
+            <input type="text" class="oran-input" placeholder="ARBOL.OSO.MIEL" formControlName="alias">
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-guardar" (click)="updateUser()">Guardar</button>
+            <button type="button" class="btn-cancelar" (click)="resetFormData()">Cancelar</button>
+          </div>
+        
+        </form>
+      </mat-tab>
+
+      <mat-tab label="Editar contraseña">
+        <form class="profile-form tab-content" [formGroup]="formPassword">
+
+          <div class="input-group">
+            <label>Contraseña actual</label>
+            <input type="password" class="oran-input" formControlName="password">
+          </div>
+          
+          <div class="input-group">
+            <label>Nueva contraseña</label>
+            <input type="password" class="oran-input" formControlName="newPassword">
+          </div>
+          
+          <div class="input-group">
+            <label>Repetir contraseña nueva</label>
+            <input type="password" class="oran-input" formControlName="repeatPassword">
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn-guardar" (click)="updatePassword()">Guardar</button>
+            <button type="button" class="btn-cancelar" (click)="resetFormPassword()">Cancelar</button>
+          </div>
+        
+        </form>
+      </mat-tab>
+
+    </mat-tab-group>
+
+  </div>
+</div>
