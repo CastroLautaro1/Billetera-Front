@@ -27,7 +27,7 @@ export class AccountService {
   // Endpoint para actualizar solamente el alias
   updateAlias(alias: string) {
     const dto = {alias : alias}
-    return this.http.put(`${this.API_URL}/alias`, dto);
+    return this.http.patch(`${this.API_URL}/alias`, dto);
   }
 
 }
