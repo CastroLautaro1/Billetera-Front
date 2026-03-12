@@ -18,24 +18,99 @@
             
             <div class="input-group">
               <label>Nombre/s</label>
-              <input type="text" class="oran-input" placeholder="Juan" formControlName="firstname">
+              <input 
+                type="text" 
+                class="oran-input" 
+                placeholder="Juan" 
+                formControlName="firstname"
+                [class.input-error]="formData.controls.firstname.invalid && formData.controls.firstname.touched">
+
+              @if (formData.controls.firstname.invalid && formData.controls.firstname.touched) {
+                <div class="error-container">
+                  @if (formData.controls.firstname.hasError('required')) {
+                    <span class="error-text">El nombre es obligatorio.</span>
+                  }
+                  @if (formData.controls.firstname.hasError('minlength')) {
+                    <span class="error-text">Debe tener al menos 2 caracteres.</span>
+                  }
+                  @if (formData.controls.firstname.hasError('maxlength')) {
+                    <span class="error-text">No puede superar los 50 caracteres.</span>
+                  }
+                </div>
+              }
+
             </div>
             
             <div class="input-group">
               <label>Apellido/s</label>
-              <input type="text" class="oran-input" placeholder="Perez" formControlName="lastname">
+              <input 
+                type="text" 
+                class="oran-input" 
+                placeholder="Perez" 
+                formControlName="lastname"
+                [class.input-error]="formData.controls.lastname.invalid && formData.controls.lastname.touched">
+
+              @if (formData.controls.lastname.invalid && formData.controls.lastname.touched) {
+                <div class="error-container">
+                  @if (formData.controls.lastname.hasError('required')) {
+                    <span class="error-text">El apellido es obligatorio.</span>
+                  }
+                  @if (formData.controls.lastname.hasError('minlength')) {
+                    <span class="error-text">Debe tener al menos 2 caracteres.</span>
+                  }
+                  @if (formData.controls.lastname.hasError('maxlength')) {
+                    <span class="error-text">No puede superar los 50 caracteres.</span>
+                  }
+                </div>
+              }
             </div>
           
         </div>
 
           <div class="input-group">
             <label>Email</label>
-            <input type="email" class="oran-input" placeholder="juan.perez@email.com" formControlName="email">
+            <input 
+              type="email" 
+              class="oran-input" 
+              placeholder="juan.perez@email.com" 
+              formControlName="email"
+              [class.input-error]="formData.controls.email.invalid && formData.controls.email.touched">
+
+            @if (formData.controls.email.invalid && formData.controls.email.touched) {
+              <div class="error-container">
+                @if (formData.controls.email.hasError('required')) {
+                  <span class="error-text">El email es obligatorio.</span>
+                }
+                @if (formData.controls.email.hasError('email')) {
+                  <span class="error-text">Debe tener formato de Email</span>
+                }
+              </div>
+            }
+            
           </div>
           
           <div class="input-group">
             <label>Alias</label>
-            <input type="text" class="oran-input" placeholder="ARBOL.OSO.MIEL" formControlName="alias">
+            <input 
+              type="text" 
+              class="oran-input" 
+              placeholder="ARBOL.OSO.MIEL" 
+              formControlName="alias"
+              [class.input-error]="formData.controls.alias.invalid && formData.controls.alias.touched">
+              
+            @if (formData.controls.alias.invalid && formData.controls.alias.touched) {
+              <div class="error-container">
+                @if (formData.controls.alias.hasError('required')) {
+                  <span class="error-text">El alias es obligatorio.</span>
+                }
+                @if (formData.controls.alias.hasError('minlength')) {
+                  <span class="error-text">Debe tener al menos 4 caracteres.</span>
+                }
+                @if (formData.controls.alias.hasError('maxlength')) {
+                  <span class="error-text">No puede superar los 20 caracteres.</span>
+                }
+              </div>
+            }
           </div>
           
           <div class="form-actions">
@@ -51,17 +126,62 @@
 
           <div class="input-group">
             <label>Contraseña actual</label>
-            <input type="password" class="oran-input" formControlName="password">
+            <div class="input-password-wrapper">
+                <input 
+                  [type]="hidePassword() ? 'password' : 'text'" 
+                  class="oran-input" 
+                  formControlName="password">
+
+                <button 
+                  type="button" 
+                  class="btn-eye" 
+                  (click)="hidePassword.set(!hidePassword())">
+                  <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </div>
+           
           </div>
           
           <div class="input-group">
             <label>Nueva contraseña</label>
-            <input type="password" class="oran-input" formControlName="newPassword">
+            <div class="input-password-wrapper">
+                <input 
+                  [type]="hideNewPassword() ? 'password' : 'text'"
+                  class="oran-input" 
+                  formControlName="newPassword"
+                  [class.input-error]="formPassword.controls.newPassword.invalid && formPassword.controls.newPassword.touched">
+
+                <button 
+                  type="button" 
+                  class="btn-eye" 
+                  (click)="hideNewPassword.set(!hideNewPassword())">
+                  <mat-icon>{{ hideNewPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </div>
+            @if (formPassword.controls.newPassword.invalid && formPassword.controls.newPassword.touched) {
+              <div class="error-container">
+                @if (formPassword.controls.newPassword.hasError('required')) {
+                  <span class="error-text">La contraseña es obligatoria.</span>
+                }
+                @if (formPassword.controls.newPassword.hasError('minlength')) {
+                  <span class="error-text">La contraseña debe tener al menos 8 caracteres.</span>
+                }
+                @if (formPassword.controls.newPassword.hasError('missingUppercase')) {
+                  <span class="error-text">La contraseña debe contener al menos una mayúscula.</span>
+                }
+                @if (formPassword.controls.newPassword.hasError('missingNumber')) {
+                  <span class="error-text">La contraseña debe contener al menos un número.</span>
+                }
+              </div>
+            }
           </div>
           
           <div class="input-group">
             <label>Repetir contraseña nueva</label>
-            <input type="password" class="oran-input" formControlName="repeatPassword">
+            <input 
+              [type]="hideNewPassword() ? 'password' : 'text'" 
+              class="oran-input" 
+              formControlName="repeatPassword">
           </div>
           
           <div class="form-actions">

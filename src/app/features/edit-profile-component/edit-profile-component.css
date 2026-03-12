@@ -23,6 +23,10 @@
   color: var(--text-main);
 }
 
+.btn-back:hover {
+  background-color: var(--bg-hover);
+}
+
 .header h2 {
   display: flex;
   align-items: center;
@@ -30,7 +34,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0;
-  color: #0a192f;
+  color: var(--text-main);
 }
 
 .title-icon {
@@ -38,8 +42,8 @@
 }
 
 .profile-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium);
   border-radius: 12px;
   width: 100%;
   max-width: 600px;
@@ -47,40 +51,12 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
-/* --- TABS MEJORADOS (SEGMENTED CONTROL) --- */
-.custom-tabs-container {
-  display: flex;
-  background-color: #f3f4f6; /* Fondo gris claro unificado */
-  padding: 4px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
+/* --- TABS  --- */
 .tab-content {
   padding-top: 25px; 
 }
 
-.tab-btn {
-  flex: 1; /* Para que ambos ocupen mitad y mitad */
-  background: transparent;
-  border: none;
-  padding: 10px 0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #6b7280;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-/* El botón que está seleccionado */
-.tab-btn.active {
-  background-color: #ffffff;
-  color: var(--accent-primary); /* Texto naranja */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombrita para que resalte */
-}
-
-/* --- FORMULARIOS E INPUTS NATIVOS --- */
+/* --- FORMULARIOS E INPUTS  --- */
 .profile-form {
   display: flex;
   flex-direction: column;
@@ -105,15 +81,16 @@
 .input-group label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #4b5563;
+  color: var(--text-main);
 }
 
 .oran-input {
   padding: 12px 15px;
-  border: 1px solid #d1d5db; /* Borde gris base */
+  border: 1px solid var(--border-medium); /* Borde gris base */
   border-radius: 8px;
   font-size: 0.95rem;
-  color: #111827;
+  background-color: var(--bg-main);
+  color: var(--text-main);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -122,6 +99,64 @@
 .oran-input:focus {
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15); /* Resplandor naranja */
+}
+
+/* --- CLASE PARA LOS ERRORES*/
+.input-error {
+  border-color: var(--danger) !important;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* --- OJO PARA VER LA CONTRASEÑA --- */
+/* Contenedor del input y el botón */
+.input-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Evitamos que el texto de la contraseña pase por debajo del icono */
+.input-password-wrapper .oran-input {
+  width: 100%;
+  padding-right: 45px; 
+}
+
+/* Estilo del botón del ojo */
+.btn-eye {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-primary); /* Gris sutil */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.btn-eye mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Al pasar el mouse, se pinta de naranja Oran */
+.btn-eye:hover {
+  color: var(--accent-primary);
 }
 
 /* --- BOTONES DE ACCIÓN --- */
@@ -148,18 +183,18 @@
 }
 
 .btn-guardar:hover {
-  background-color: rgba(255, 102, 0, 0.05);
+  background-color: var(--accent-hover);
 }
 
 .btn-cancelar {
   background-color: transparent;
-  border: 1px solid #d1d5db;
-  color: #6b7280;
+  border: 1px solid var(--border-medium);
+  color: var(--text-muted);
 }
 
 .btn-cancelar:hover {
-  background-color: #f3f4f6;
-  color: #374151;
+  background-color: var(--bg-main);
+  color: var(--text-main);
 }
 
 /* Animación sutil al cambiar de pestaña */

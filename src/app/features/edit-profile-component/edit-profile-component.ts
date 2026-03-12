@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { UserService } from '../../core/services/user-service';
@@ -8,18 +8,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { UpdateUserDTO } from '../../shared/models/UpdateUserDTO';
 import { UpdatePasswordDTO } from '../../shared/models/UpdatePasswordDTO';
+import { strongPasswordValidator, passwordMatchValidator } from '../../core/validators/custom-validators';
 
-// Validado para comparar contraseñas
-export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const newPassword = control.get('newPassword');
-  const repeatPassword = control.get('repeatPassword');
-
-  // Si existen y no son iguales, retornamos un error
-  if (newPassword && repeatPassword && newPassword.value !== repeatPassword.value) {
-    return { passwordsDontMatch: true };
-  }
-  return null;
-};
 
 @Component({
   selector: 'app-edit-profile-component',
@@ -38,6 +28,9 @@ export class EditProfileComponent {
   private _account = inject(AccountService);
   private _fb = inject(FormBuilder);
 
+  hidePassword = signal(true);
+  hideNewPassword = signal(true);
+
   userData = toSignal(
     this._user.getProfile(),
     { initialValue : undefined }
@@ -50,15 +43,15 @@ export class EditProfileComponent {
 
 
   formData = this._fb.group({
-    firstname: [this.userData()?.firstname,[Validators.required, Validators.minLength(2), Validators.minLength(50)]],
-    lastname: [this.userData()?.lastname, [Validators.required, Validators.minLength(2), Validators.minLength(50)]],
+    firstname: [this.userData()?.firstname,[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    lastname: [this.userData()?.lastname, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     email: [this.userData()?.email, [Validators.email, Validators.required]],
-    alias: [this.accountData()?.alias, [Validators.required, Validators.minLength(4), Validators.minLength(20)]]
+    alias: [this.accountData()?.alias, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
   });
 
   formPassword = this._fb.group({
     password: ['', [Validators.required, Validators.minLength(8)]],
-    newPassword: ['', [Validators.required, Validators.minLength(8)]],
+    newPassword: ['', [Validators.required, Validators.minLength(8), strongPasswordValidator]],
     repeatPassword: ['', [Validators.required]],
   }, {validators: passwordMatchValidator});
 
@@ -86,7 +79,10 @@ export class EditProfileComponent {
 
 
   updateUser() {
-    if(this.formData.invalid) return;
+
+    console.log("Entra")
+
+    // if(this.formData.invalid) return;
 
     const profileData: UpdateUserDTO = {
       firstname: this.formData.controls.firstname.value!,
@@ -136,7 +132,7 @@ export class EditProfileComponent {
 
     this._user.updatePassword(passwordData).subscribe({
       next: () => {
-        console.log("Contraseña actualizada correctamente")
+        console.log("Contraseña actualizada correctamente: ", passwordData.newPassword)
       },
       error: err => console.log("Error al actualizar la contraseña", err)
     });
@@ -152,6 +148,6 @@ export class EditProfileComponent {
   }
 
   resetFormPassword() {
-    this.formPassword.reset;
+    this.formPassword.reset();
   }
 }
