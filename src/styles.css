@@ -91,3 +91,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Info (Naranja) */
 .snack-info .mdc-snackbar__surface { border: 1px solid var(--accent-primary) !important; }
 .snack-info mat-icon { color: var(--accent-primary) !important; }
+
+/* --- OVERRIDE PARA TABS DE MATERIAL --- */
+.oran-tabs .mdc-tab__text-label {
+  /* Texto inactivo */
+  color: var(--text-muted) !important; 
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.oran-tabs .mdc-tab--active .mdc-tab__text-label {
+  /* Texto activo del tab */
+  color: var(--accent-primary) !important; 
+  font-weight: 600;
+}
+
+.oran-tabs .mdc-tab-indicator__content--underline {
+  /* La línea de abajo de cada tab */
+  border-color: var(--accent-primary) !important; 
+}
+
+/* Color del efecto de click (Ripple) */
+.oran-tabs .mat-mdc-tab .mat-ripple-element {
+  background-color: var(--bg-hover) !important;
+}

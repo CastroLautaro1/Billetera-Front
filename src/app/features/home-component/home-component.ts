@@ -58,16 +58,4 @@ export class HomeComponent {
     this.amountVisible = !this.amountVisible;
   }
 
-  goProfile() {
-    this._router.navigate(['profile']);
-  }
-
-  toTransfer() {
-    this._router.navigate(['transferContact']);
-  }
-
-  goHistory() {
-    this._router.navigate(['history']);
-  }
-
 }

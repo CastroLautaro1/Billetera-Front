@@ -4,7 +4,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { ThemeService } from '../../../core/services/theme-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
@@ -15,7 +15,9 @@ import { AuthService } from '../../../core/services/auth-service';
     MatMenu,
     MatMenuItem,
     MatMenuTrigger, 
-    MatDivider],
+    MatDivider,
+    RouterLink
+  ],
   templateUrl: './navbar-component.html',
   styleUrl: './navbar-component.css',
 })

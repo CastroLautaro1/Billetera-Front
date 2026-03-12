@@ -9,19 +9,32 @@
 html {
   @include mat.theme((
     color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: mat.$orange-palette,
+      tertiary: mat.$azure-palette,
     ),
     typography: Roboto,
     density: 0,
   ));
+
+  /* --- Tus colores principales de Oran --- */
+  --mat-sys-primary: #ff6600; 
+  --mat-sys-on-primary: #ffffff; 
+  --mat-sys-primary-container: rgba(255, 102, 0, 0.1); 
+  --mat-sys-on-primary-container: #ff6600;
+
+  /* --- FIX PARA LAS PESTAÑAS (TABS) EN MODO OSCURO --- */
+  --mat-tab-header-inactive-label-text-color: #9ca3af; 
+  --mat-tab-header-active-label-text-color: #ff6600;
+  --mdc-tab-indicator-active-indicator-color: #ff6600;
+  --mat-tab-header-active-ripple-color: rgba(255, 102, 0, 0.15);
+  --mat-tab-header-inactive-ripple-color: rgba(255, 255, 255, 0.05);
 }
 
 body {
   // Default the application to a light color theme. This can be changed to
   // `dark` to enable the dark color theme, or to `light dark` to defer to the
   // user's system settings.
-  color-scheme: light;
+  color-scheme: light dark;
 
   // Set a default background, font and text colors for the application using
   // Angular Material's system-level CSS variables. Learn more about these

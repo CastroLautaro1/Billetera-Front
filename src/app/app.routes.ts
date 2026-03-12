@@ -7,6 +7,7 @@ import { ReceiptComponent } from './features/receipt-component/receipt-component
 import { HistoryComponent } from './features/history-component/history-component';
 import { UserModalComponent } from './features/user-modal-component/user-modal-component';
 import { TransactionComponent } from './features/transaction-component/transaction-component';
+import { EditProfileComponent } from './features/edit-profile-component/edit-profile-component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,5 +16,6 @@ export const routes: Routes = [
     {path: 'transferAmount/:id', component: TransferAmountComponent},
     {path: 'receipt/:id', component: ReceiptComponent},
     {path: 'history', component: HistoryComponent},
-    {path: 'transaction/:id', component: TransactionComponent}
+    {path: 'transaction/:id', component: TransactionComponent},
+    {path: 'editProfile', component: EditProfileComponent}
 ];
