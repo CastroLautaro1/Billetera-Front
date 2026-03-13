@@ -5,23 +5,12 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { Login } from '../../shared/models/Login';
 import { Register } from '../../shared/models/Register';
 import { MatIcon } from '@angular/material/icon';
-import { MatError, MatFormField, MatLabel, MatPrefix } from '@angular/material/form-field';
-import { MatCard } from '@angular/material/card';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-auth-component',
   imports: [
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatError,
-    MatInput,
-    MatButton,
-    MatIcon,
-    MatPrefix
+    MatIcon
   ],
   templateUrl: './auth-component.html',
   styleUrl: './auth-component.css',

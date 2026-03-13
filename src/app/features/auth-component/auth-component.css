@@ -11,6 +11,7 @@
   box-sizing: border-box;
 }
 
+/* --- LOGO DE ORAN --- */
 .brand-section { 
   text-align: center; 
   margin-bottom: 20px; 
@@ -44,6 +45,7 @@
   color: var(--text-main); 
 }
 
+/* --- CARD PARA AUTENTICARSE --- */
 .auth-card {
   background: var(--bg-card);
   width: 100%;
@@ -83,23 +85,122 @@
   color: white;
 }
 
-/* Espaciado entre grupos de Material para que no se peguen */
-mat-form-field {
-  margin-bottom: 20px;
+/* --- FORM E INPUTS --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; 
 }
 
-.full-width { width: 100%; }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-placeholder, #9ca3af);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  transition: color 0.2s ease;
+  pointer-events: none; 
+}
+
+.oran-input {
+  width: 100%;
+  padding: 14px 15px 14px 40px; /* 40px a la izquierda para que el icono tenga lugar */
+  background-color: transparent;
+  border: 1px solid var(--border-medium, #4b5563);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text-main, #ffffff);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.oran-input::placeholder {
+  color: var(--text-placeholder, #9ca3af);
+}
+
+/*  HOVERS PARA LOS INPUTS */
+.oran-input:hover {
+  border-color: var(--accent-primary);
+}
+
+.oran-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+}
+
+.input-wrapper:focus-within .input-icon {
+  color: var(--accent-primary);
+}
+
+/* --- ESTILOS DE ERROR --- */
+.oran-input.input-error {
+  border-color: var(--danger);
+}
+
+.oran-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.15);
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+  font-weight: 500;
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  animation: slideDown 0.2s ease-out /* animación para que aparezca suavemente */;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out; /* animación sutil al cambiar entre login y registro */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .row { display: flex; gap: 15px; }
 .col { flex: 1; }
 
+/* --- BOTON --- */
 .btn-primary {
   width: 100%;
   background-color: var(--accent-primary) !important;
   color: white !important;
-  padding: 25px !important;
+  padding: 20px !important;
   border-radius: 12px !important;
   font-weight: 500 !important;
-  margin-top: 20px;
+  font-size: 1.2rem;
+  margin-top: 10px;
   transition: all 0.2s ease-in-out;
 }
 
@@ -117,34 +218,21 @@ mat-form-field {
   font-weight: bold;
 }
 
+/* --- FOOTER --- */
 .auth-footer { 
-  /* 4. Separar el footer */
   margin-top: 50px; 
   color: var(--text-muted); 
   font-size: 0.85rem; 
 }
 
-/* Ajuste de iconos matPrefix */
-i[matPrefix] {
-  color: var(--text-placeholder);
-  font-size: 1.2rem;
-  margin-right: 12px;
-}
-
 /* Color de los iconos cuando no están en foco */
 mat-icon[matPrefix] {
   color: var(--text-placeholder);;
-  margin-right: 12px; /* Espacio entre el icono y el texto */
-  transform: scale(0.9); /* Ajuste de tamaño opcional */
+  margin-right: 12px; 
+  transform: scale(0.9); 
 }
 
 /* Color de los iconos cuando el usuario hace clic en el input */
 .mat-mdc-form-field.mat-focused mat-icon[matPrefix] {
-  color: var(--accent-primary); /* Se pone naranja Oran al escribir */
-}
-
-/* Ajuste para centrar el icono verticalmente */
-.mat-mdc-text-field-wrapper .mat-mdc-form-field-prefix {
-  display: flex;
-  align-items: center;
+  color: var(--accent-primary); 
 }

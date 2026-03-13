@@ -13,65 +13,124 @@
       <button type="button" [class.active]="!isLoginMode" (click)="isLoginMode = false">Registrarse</button>
     </div>
 
-    <form [formGroup]="isLoginMode ? loginForm : registerForm" (ngSubmit)="submit()" class="auth-form">
-      
-      @if (!isLoginMode) {
-        <div class="row">
-          <mat-form-field appearance="outline" class="col">
-            <mat-label>Nombre</mat-label>
-            <input matInput formControlName="firstname" placeholder="Juan">
-            <mat-icon matPrefix>person</mat-icon>
-            @if (registerForm.get('firstname')?.hasError('required')) {
-              <mat-error>El nombre es obligatorio</mat-error>
+    @if (isLoginMode) {
+      <form [formGroup]="loginForm" (ngSubmit)="submit()" class="auth-form fade-in">
+        
+        <div class="input-group">
+         
+          <label>Email</label>
+          <div class="input-wrapper">
+            <mat-icon class="input-icon">email</mat-icon>
+            <input type="email" class="oran-input" formControlName="email" placeholder="tu@email.com"
+                   [class.input-error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          </div>
+         
+          @if (loginForm.get('email')?.touched) {
+            @if (loginForm.get('email')?.hasError('required')) {
+              <span class="error-text">El email es requerido</span>
+            } @else if (loginForm.get('email')?.hasError('email')) {
+              <span class="error-text">Ingresa un formato válido</span>
             }
-          </mat-form-field>
+          }
 
-          <mat-form-field appearance="outline" class="col">
-            <mat-label>Apellido</mat-label>
-            <input matInput formControlName="lastname" placeholder="Pérez">
-            <mat-icon matPrefix>person</mat-icon>
-            @if (registerForm.get('lastname')?.hasError('required')) {
-              <mat-error>El apellido es obligatorio</mat-error>
-            }
-          </mat-form-field>
         </div>
-      }
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" type="email" placeholder="tu@email.com">
-        <mat-icon matPrefix>email</mat-icon>
-        @if (emailControl?.hasError('required')) {
-          <mat-error>El email es requerido</mat-error>
-        } @else if (emailControl?.hasError('email')) {
-          <mat-error>Ingresa un formato de email válido</mat-error>
-        }
-      </mat-form-field>
+        <div class="input-group">
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Contraseña</mat-label>
-        <input matInput type="password" formControlName="password" placeholder="........">
-        <mat-icon matPrefix>lock</mat-icon>
-        @if (passwordControl?.hasError('required')) {
-          <mat-error>La contraseña es requerida</mat-error>
-        } @else if (passwordControl?.hasError('minlength')) {
-          <mat-error>Mínimo 6 caracteres</mat-error>
-        }
-      </mat-form-field>
+          <label>Contraseña</label>
+          <div class="input-wrapper">
+            <mat-icon class="input-icon">lock</mat-icon>
+            <input type="password" class="oran-input" formControlName="password" placeholder="••••••••"
+                   [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          </div>
+          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+            <span class="error-text">La contraseña es requerida</span>
+          } @else if (loginForm.get('password')?.hasError('minlength')) {
+            <span class="error-text">La contraseña debe tener 8 caracteres mínimo</span>
+          }
 
-      @if (isLoginMode) {
+        </div>
+
         <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-      }
 
-      @if (!isLoginMode) {
+        <button type="submit" class="btn-primary" [disabled]="loginForm.invalid">
+          Iniciar Sesión
+        </button>
+      </form>
+    }
+
+    @else {
+      <form [formGroup]="registerForm" (ngSubmit)="submit()" class="auth-form fade-in">
+        
+        <div class="row">
+          <div class="input-group col">
+
+            <label>Nombre</label>
+            <div class="input-wrapper">
+              <mat-icon class="input-icon">person</mat-icon>
+              <input type="text" class="oran-input" formControlName="firstname" placeholder="Juan"
+                     [class.input-error]="registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched">
+            </div>
+            @if (registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched) {
+              <span class="error-text">Obligatorio</span>
+            }
+
+          </div>
+
+          <div class="input-group col">
+
+            <label>Apellido</label>
+            <div class="input-wrapper">
+              <mat-icon class="input-icon">person</mat-icon>
+              <input type="text" class="oran-input" formControlName="lastname" placeholder="Pérez"
+                     [class.input-error]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched">
+            </div>
+            @if (registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched) {
+              <span class="error-text">Obligatorio</span>
+            }
+          </div>
+          
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <div class="input-wrapper">
+            <mat-icon class="input-icon">email</mat-icon>
+            <input type="email" class="oran-input" formControlName="email" placeholder="tu@email.com"
+                   [class.input-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          </div>
+          @if (registerForm.get('email')?.touched) {
+            @if (registerForm.get('email')?.hasError('required')) {
+              <span class="error-text">El email es requerido</span>
+            } @else if (registerForm.get('email')?.hasError('email')) {
+              <span class="error-text">Ingresa un formato válido</span>
+            }
+          }
+        </div>
+
+        <div class="input-group">
+          <label>Contraseña</label>
+          <div class="input-wrapper">
+            <mat-icon class="input-icon">lock</mat-icon>
+            <input type="password" class="oran-input" formControlName="password" placeholder="••••••••"
+                   [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          </div>
+          @if (registerForm.get('password')?.touched) {
+            @if (registerForm.get('password')?.hasError('required')) {
+              <span class="error-text">La contraseña es requerida</span>
+            } @else if (registerForm.get('password')?.hasError('minlength')) {
+              <span class="error-text">Mínimo 6 caracteres</span>
+            }
+          }
+        </div>
+
         <p class="terms">Al registrarte, aceptas nuestros <span>Términos y Condiciones</span></p>
-      }
 
-      <button mat-flat-button type="submit" class="btn-primary" 
-              [disabled]="isLoginMode ? loginForm.invalid : registerForm.invalid">
-        {{ isLoginMode ? "Iniciar Sesión" : "Crear Cuenta" }}
-      </button>
-    </form>
+        <button type="submit" class="btn-primary" [disabled]="registerForm.invalid">
+          Crear Cuenta
+        </button>
+      </form>
+    }
   </div>
 
   <footer class="auth-footer">
