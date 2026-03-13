@@ -1,5 +1,7 @@
 <header>
-    <app-navbar-component></app-navbar-component>
+    @if(!isAuthPage()) {
+        <app-navbar-component></app-navbar-component>
+    }
 </header>
 
 <main>

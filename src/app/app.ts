@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar-component';
 
 @Component({
@@ -10,4 +10,10 @@ import { NavbarComponent } from './shared/components/navbar/navbar-component';
 })
 export class App {
   protected title = 'billetera_front';
+  private _router = inject(Router);
+  
+  // Si se esta en /auth oculto el navbar
+  isAuthPage() {
+    return this._router.url === '/auth';
+  }
 }

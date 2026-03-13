@@ -196,12 +196,14 @@
   width: 100%;
   background-color: var(--accent-primary) !important;
   color: white !important;
-  padding: 20px !important;
+  padding: 15px !important;
   border-radius: 12px !important;
+  border: none;
   font-weight: 500 !important;
   font-size: 1.2rem;
   margin-top: 10px;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
