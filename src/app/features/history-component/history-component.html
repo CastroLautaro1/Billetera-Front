@@ -1,113 +1,126 @@
 <div class="dashboard-container">
-  
-  <aside class="filters-sidebar" [formGroup]="filterForm">
-    <h2 class="sidebar-title">Filtros</h2>
-
-    <div class="filter-group">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Monto mínimo</mat-label>
-        <input matInput type="number" formControlName="minAmount" placeholder="$ 0">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Monto máximo</mat-label>
-        <input matInput type="number" formControlName="maxAmount" placeholder="$ 999.999">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Fecha inicio</mat-label>
-        <input matInput [matDatepicker]="startPicker" formControlName="start" placeholder="dd/mm/aaaa">
-        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Fecha fin</mat-label>
-        <input matInput [matDatepicker]="endPicker" formControlName="end" placeholder="dd/mm/aaaa">
-        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Tipo</mat-label>
-        <mat-select formControlName="type">
-          <mat-option value="TRANSFER">Transferencia</mat-option>
-          <mat-option value="DEPOSIT">Depósito</mat-option>
-          <mat-option value="WITHDRAWL">Retiro</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="sidebar-actions">
-      <button mat-flat-button class="btn-apply full-width" (click)="applyFilters()">
-        Aplicar
-      </button>
-      <button mat-stroked-button class="btn-clear full-width" (click)="clearFilters()">
-        Limpiar
-      </button>
-    </div>
-  </aside>
-
-  <section class="main-content">
-    
-    <section class="search-section">
+  <section class="search-section">
+    <div class="search-wrapper">
       <div class="custom-search">
         <mat-icon>search</mat-icon>
-        <input type="text" placeholder="Buscar por nombre..." (input)="onSearch($event)">
+        <input
+          type="text"
+          placeholder="Buscar por nombre"
+          [formControl]="searchControl"
+        />
       </div>
-    </section>
-
-    <section class="transactions-section">
-      <h3 class="section-title">Recientes</h3>
-      
-      <div class="transaction-list">
-        @for (tx of transactions(); track tx.id) {
-          <div class="transaction-card" (click)="goTransaction(tx.id)">
-            <div class="card-left">
-              <div class="icon-circle-oran">
-                <mat-icon>{{ isEntry(tx) ? 'south_west' : 'send' }}</mat-icon>
-              </div>
-              <div class="info">
-                <h3>
-                  <app-user-fullname-component 
-                  [accountId]="tx.counterpartyAccountId === userAccount()?.id ? tx.originAccountId : tx.counterpartyAccountId">
-                  </app-user-fullname-component>
-                </h3>
-                @if (tx.transactionType === 'TRANSFER') {
-                  <p>{{ isEntry(tx) ? 'Transferencia recibida' : 'Transferencia enviada'}}</p>
-                }
-              </div>
-            </div>
-            <div class="card-right" [class.positive]="isEntry(tx)">
-              <span class="amount-oran">
-                {{ isEntry(tx) ? '+' : '-'}}${{ tx.amount | number:'1.2-2'}}
-              </span>
-              <p>{{ tx.timestamp | date:'dd MMM'}}</p>
-            </div>
-          </div>
-        } @empty {
-          <div class="empty-history">
-            <div class="empty-icon-wrapper">
-              <mat-icon>manage_search</mat-icon>
-            </div>
-            <h4 class="empty-title">No encontramos transacciones</h4>
-            <p class="empty-subtitle">Aún no tenés movimientos registrados o no coinciden con tu búsqueda.</p>
-          </div>
-        }
-      </div>
-
-      @if(totalElements() > 0) {
-        <mat-paginator 
-          [length]="totalElements()"
-          [pageSize]="pageSize"
-          [pageIndex]="currentPage"
-          (page)="onPageChange($event)"
-          hidePageSize
-          aria-label="Seleccionar página">
-        </mat-paginator>
-      }
-      
-    </section>
+      <button class="btn-filter-toggle" (click)="toggleFilters()">
+        <mat-icon>tune</mat-icon>
+      </button>
+    </div>
   </section>
 
+  <section class="transactions-section">
+    <h3 class="section-title">Recientes</h3>
+
+    <div class="transaction-list">
+      @for (tx of transactions(); track tx.id) {
+        <div class="transaction-card" (click)="goTransaction(tx.id)">
+          <div class="card-left">
+            <div class="icon-circle-oran">
+              <mat-icon>{{ isEntry(tx) ? "south_west" : "send" }}</mat-icon>
+            </div>
+            <div class="info">
+              <h3>
+                <app-user-fullname-component
+                  [accountId]=" tx.counterpartyAccountId === userAccount()?.id ? tx.originAccountId : tx.counterpartyAccountId">
+                </app-user-fullname-component>
+              </h3>
+              @if (tx.transactionType === "TRANSFER") {
+                <p>{{ isEntry(tx) ? "Transferencia recibida" : "Transferencia enviada" }}</p>
+              }
+            </div>
+          </div>
+          <div class="card-right" [class.positive]="isEntry(tx)">
+            <span class="amount-oran">
+              {{ isEntry(tx) ? "+" : "-" }}${{ tx.amount | number: "1.2-2" }}
+            </span>
+            <p>{{ tx.timestamp | date: "dd MMM" }}</p>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-history">
+          <div class="empty-icon-wrapper">
+            <mat-icon>manage_search</mat-icon>
+          </div>
+          <h4 class="empty-title">No encontramos transacciones</h4>
+          <p class="empty-subtitle">
+            Aún no tenés movimientos registrados o no coinciden con tu búsqueda.
+          </p>
+        </div>
+      }
+    </div>
+
+    @if (totalElements() > 0) {
+      <mat-paginator
+        [length]="totalElements()"
+        [pageSize]="pageSize"
+        [pageIndex]="currentPage"
+        (page)="onPageChange($event)"
+        hidePageSize
+        aria-label="Seleccionar página"
+      >
+      </mat-paginator>
+    }
+  </section>
 </div>
+
+@if (isFiltersOpen) {
+  <div class="filters-backdrop" (click)="toggleFilters()"></div>
+}
+
+<aside class="filters-panel" [class.open]="isFiltersOpen" [formGroup]="filterForm">
+  
+  <div class="panel-header">
+    <h2>Filtros</h2>
+    <button class="btn-close" (click)="toggleFilters()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="panel-body">
+    <div class="input-group">
+      <label>Monto mínimo</label>
+      <input type="number" class="oran-input" formControlName="minAmount" placeholder="0.00">
+    </div>
+
+    <div class="input-group">
+      <label>Monto máximo</label>
+      <input type="number" class="oran-input" formControlName="maxAmount" placeholder="1000.00">
+    </div>
+
+    <div class="input-group">
+      <label>Fecha inicio</label>
+      <input type="date" class="oran-input" formControlName="start">
+    </div>
+
+    <div class="input-group">
+      <label>Fecha fin</label>
+      <input type="date" class="oran-input" formControlName="end">
+    </div>
+
+    <div class="input-group">
+      <label>Tipo de transacción</label>
+      <select class="oran-input" formControlName="type">
+        <option value="ALL">Todos</option>
+        <option value="TRANSFER">Transferencia</option>
+        <option value="DEPOSIT">Depósito</option>
+        <option value="WITHDRAWL">Retiro</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <button type="button" class="btn-apply full-width" (click)="applyFilters(); toggleFilters()">
+      Aplicar filtros
+    </button>
+    <button type="button" class="btn-clear full-width" (click)="clearFilters()">
+      Limpiar
+    </button>
+  </div>
+</aside>

@@ -1,11 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatFormField, MatInputModule } from '@angular/material/input';
 import { TransactionService } from '../../core/services/transaction-service';
 import { Transaction } from '../../shared/models/Transaction';
 import { CommonModule } from '@angular/common';
@@ -13,16 +10,12 @@ import { UserFullnameComponent } from '../../shared/components/user-fullname-com
 import { AccountService } from '../../core/services/account-service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-history-component',
   imports: [
-    MatDatepickerModule,
-    MatNativeDateModule,
     MatPaginatorModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormField,
     ReactiveFormsModule,
     MatIcon,
     CommonModule,
@@ -40,6 +33,10 @@ export class HistoryComponent {
   private _userAccount = inject(AccountService);
   private _fb = inject(FormBuilder);
   private _router = inject(Router);
+
+  searchControl = new FormControl('');
+
+  isFiltersOpen = false;
 
   transactions = signal<Transaction[]>([]);
   totalElements = signal<number>(0);
@@ -62,13 +59,22 @@ export class HistoryComponent {
 
   ngOnInit() {
     this.loadTransactions();
+
+    this.searchControl.valueChanges.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.currentPage = 0;
+      this.loadTransactions();
+    })
   }
 
   loadTransactions() {
     const filters = this.filterForm.value;
+    const searchTerm = this.searchControl.value!;
 
-    const startIso = filters.start ? filters.start.toISOString() : undefined;
-    const endIso = filters.end ? filters.end.toISOString() : undefined;
+    const startIso = filters.start ? new Date(filters.start).toISOString() : undefined;
+    const endIso = filters.end ? new Date(filters.end).toISOString() : undefined;
 
     this._transaction.getHistoryWithFilter(
       this.currentPage,
@@ -77,7 +83,8 @@ export class HistoryComponent {
       filters.minAmount!,
       filters.maxAmount!,
       startIso,
-      endIso
+      endIso,
+      searchTerm
     ).subscribe({
       next: (response) => {
         this.transactions.set(response.content);
@@ -113,6 +120,10 @@ export class HistoryComponent {
     if (t.transactionType === 'DEPOSIT') return true;
 
     return t.transactionType === 'TRANSFER' && t.counterpartyAccountId === this.userAccount()?.id;
+  }
+
+  toggleFilters() {
+    this.isFiltersOpen = !this.isFiltersOpen;
   }
 
   goTransaction(id: number) {

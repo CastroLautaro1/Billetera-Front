@@ -1,111 +1,26 @@
-/* --- CONTENEDOR PRINCIPAL (Layout) --- */
+/* --- LAYOUT PRINCIPAL --- */
 .dashboard-container {
-  display: flex;
-  gap: 30px;
-  max-width: 1300px;
+  max-width: 900px; 
   margin: 0 auto;
-  padding: 30px;
+  padding: 30px 20px;
   background-color: var(--bg-main); 
   min-height: 100vh;
-  color: white;
+  color: var(--text-main);
 }
 
-/* --- BARRA LATERAL DE FILTROS --- */
-.filters-sidebar {
-  flex: 0 0 280px; 
-  background-color: var(--bg-card); 
-  border: 1px solid var(--border-medium); 
-  border-radius: 15px;
-  padding: 25px;
+/* --- BUSCADOR Y BOTÓN FILTRO --- */
+.search-wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-self: flex-start; 
-}
-/* TITULO: 'Filtros'*/
-.sidebar-title {
-  color: var(--accent-primary);
-  font-size: 1.5rem;
-  margin: 0 0 10px 0;
-  font-weight: 700;
-}
-/* Todos los filtros*/
-.filter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px; /* Amontonados verticalmente como en la imagen */
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
 }
 
-/* BOTONS DE APLICAR Y LIMPIAR */
-.sidebar-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: auto; /* Empuja los botones al fondo de la sidebar */
-}
-
-/* --- Boton de aplicar filtros --- */
-.btn-apply {
-  background-color: var(--accent-primary) !important;
-  color: white !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  font-weight: 600 !important;
-  border: none;
-}
-/* --- Boton de limpiar filtros --- */
-.btn-clear {
-  background-color: var(--bg-card);
-  color: var(--accent-primary) !important;
-  border-radius: 8px !important;
-  height: 45px !important;
-  border: 1px solid var(--accent-primary)
-}
-
-.btn-apply:hover {
-  background-color: var(--accent-hover) !important;
-}
-
-.btn-clear:hover {
-  background-color: var(--bg-hover);
-}
-
-.full-width {
-  width: 100%;
-}
-
-/* Forzar colores en los forms de Material */
-::ng-deep .mat-mdc-form-field-label {
-  color: var(--text-muted) !important;
-}
-
-::ng-deep .mat-mdc-form-field-focus-indicator {
-  background-color: var(--accent-primary) !important;
-}
-
-/* Input y Select text color */
-::ng-deep .mat-mdc-input-element,
-::ng-deep .mat-mdc-select-value {
-  color: var(--text-main) !important;
-}
-
-/* Iconos de Material (Datepicker) */
-::ng-deep .mat-datepicker-toggle button {
-  color: var(--accent-primary) !important;
-}
-
-/* --- CONTENIDO PRINCIPAL --- */
-.main-content {
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* --- BARRA DE BUSQUEDA --- */
 .custom-search {
   position: relative;
   width: 100%;
+  max-width: 500px;
 }
 
 .custom-search mat-icon {
@@ -113,23 +28,199 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--accent-primary);
+  color: var(--text-placeholder);
 }
 
 .custom-search input {
   width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--accent-primary);
-  border-radius: 10px;
-  padding: 15px 15px 15px 50px;
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-medium, #e5e7eb);
+  border-radius: 25px; 
+  padding: 12px 15px 12px 45px;
   color: var(--text-main);
   outline: none;
-  font-size: 1rem;
-  max-width: 400px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
 }
 
-.custom-search input:hover {
-  box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.15)
+.custom-search input:focus {
+  border-color: var(--accent-primary, #ff6600);
+}
+
+/* El botón circular de filtros */
+.btn-filter-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-primary, #ff6600);
+  background: transparent;
+  color: var(--accent-primary, #ff6600);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-filter-toggle:hover {
+  background-color: var(--accent-light);
+}
+
+/* --- PANEL LATERAL DE FILTROS --- */
+.filters-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease;
+}
+
+.filters-panel {
+  position: fixed;
+  top: 0;
+  right: -400px; 
+  width: 100%;
+  max-width: 350px;
+  height: 100vh;
+  background-color: var(--bg-card, #ffffff);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s ease-in-out;
+}
+
+.filters-panel.open {
+  right: 0; 
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid var(--border-medium, #e5e7eb);
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.panel-body {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1; 
+}
+
+.panel-footer {
+  padding: 20px 25px;
+  border-top: 1px solid var(--border-medium, #e5e7eb);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* --- INPUTS NATIVOS --- */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.oran-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: transparent;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+.oran-input:focus {
+  border-color: var(--accent-primary, #ff6600);
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.15);
+}
+
+.oran-input:hover {
+  border-color: var(--accent-primary);
+}
+
+select.oran-input {
+  background-color: var(--bg-card); 
+}
+
+select.oran-input option {
+  background-color: var(--bg-card); 
+  color: var(--text-main);          
+  padding: 10px;                   
+}
+
+/* --- BOTONES DEL PANEL --- */
+.full-width { width: 100%; }
+
+.btn-apply {
+  background-color: var(--accent-primary, #ff6600);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-apply:hover { background-color: var(--accent-hover); }
+
+.btn-clear {
+  background-color: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-clear:hover { background-color: var(--bg-hover); }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* TITULO: 'Recients' */
@@ -222,6 +313,21 @@
 
 ::ng-deep .custom-paginator .mat-mdc-icon-button:disabled svg {
   fill: rgba(255, 255, 255, 0.3) !important;
+}
+
+::ng-deep .mat-mdc-paginator {
+  background-color: transparent !important; /* Le sacamos el fondo blanco */
+  color: var(--text-main) !important;       /* Texto "1 - 10 of 13" en blanco */
+}
+
+/* Color de las flechas (iconos SVG) */
+::ng-deep .mat-mdc-paginator .mat-mdc-icon-button svg {
+  fill: var(--text-main) !important;
+}
+
+/* Color de las flechas cuando están deshabilitadas (ej: no hay página anterior) */
+::ng-deep .mat-mdc-paginator .mat-mdc-icon-button:disabled svg {
+  fill: var(--text-muted, #6b7280) !important;
 }
 
 /* --- EMPTY STATE HISTORIAL --- */
