@@ -38,7 +38,8 @@ export class TransactionService {
     minAmount?: number,
     maxAmount?: number,
     start?: string,
-    end?: string
+    end?: string,
+    name?: string,
   ): Observable<Page<Transaction>>{
 
     let params = new HttpParams()
@@ -59,6 +60,9 @@ export class TransactionService {
     }
     if(end) {
       params = params.set('end', end);
+    }
+    if(name) {
+      params = params.set('name', name);
     }
 
     return this.http.get<Page<Transaction>>(`${this.API_URL}/history`, { params });
