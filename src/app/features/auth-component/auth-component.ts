@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../core/services/auth-service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -20,6 +20,8 @@ export class AuthComponent {
   private _router = inject(Router);
   private _form = inject(FormBuilder);
   isLoginMode = true;
+  hidePasswordLogin = signal(true);
+  hidePasswordRegister = signal(true);
 
   loginForm = this._form.group({
     email: ['', [Validators.email, Validators.required]],

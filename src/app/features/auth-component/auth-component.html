@@ -40,8 +40,19 @@
           <label>Contraseña</label>
           <div class="input-wrapper">
             <mat-icon class="input-icon">lock</mat-icon>
-            <input type="password" class="oran-input" formControlName="password" placeholder="••••••••"
-                   [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <input 
+              [type]="hidePasswordLogin() ? 'password' : 'text'" 
+              class="oran-input" 
+              formControlName="password" 
+              placeholder="••••••••"
+             [class.input-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+
+            <button 
+              type="button" 
+              class="btn-eye" 
+              (click)="hidePasswordLogin.set(!hidePasswordLogin())">
+              <mat-icon>{{ hidePasswordLogin() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
           </div>
           @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
             <span class="error-text">La contraseña es requerida</span>
@@ -89,7 +100,7 @@
               <span class="error-text">Obligatorio</span>
             }
           </div>
-          
+
         </div>
 
         <div class="input-group">
@@ -109,11 +120,23 @@
         </div>
 
         <div class="input-group">
+
           <label>Contraseña</label>
           <div class="input-wrapper">
             <mat-icon class="input-icon">lock</mat-icon>
-            <input type="password" class="oran-input" formControlName="password" placeholder="••••••••"
-                   [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+            <input 
+              [type]="hidePasswordRegister() ? 'password' : 'text'" 
+              class="oran-input" 
+              formControlName="password" 
+              placeholder="••••••••"
+             [class.input-error]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+
+            <button 
+              type="button" 
+              class="btn-eye" 
+              (click)="hidePasswordRegister.set(!hidePasswordRegister())">
+              <mat-icon>{{ hidePasswordRegister() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
           </div>
           @if (registerForm.get('password')?.touched) {
             @if (registerForm.get('password')?.hasError('required')) {
@@ -122,6 +145,7 @@
               <span class="error-text">Mínimo 6 caracteres</span>
             }
           }
+
         </div>
 
         <p class="terms">Al registrarte, aceptas nuestros <span>Términos y Condiciones</span></p>

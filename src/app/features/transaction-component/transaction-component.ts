@@ -95,4 +95,8 @@ export class TransactionComponent {
     return this.transaction()?.transactionType === 'TRANSFER' && this.transaction()?.counterpartyAccountId === this.userAccount()?.id;
   }
 
+  // Determina si el Usuario logueado es el origen o la contraparte de la transaccion
+  isOrigin(accountId: number) {
+    return this.userAccount()?.id === accountId;
+  }
 }

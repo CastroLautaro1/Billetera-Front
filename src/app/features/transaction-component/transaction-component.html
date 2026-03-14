@@ -27,7 +27,13 @@
           <mat-icon class="arrow-icon">arrow_upward</mat-icon>
           <span>Desde</span>
         </div>
-        <p class="account-name">{{ originAccount()?.firstname }} {{ originAccount()?.lastname }}</p>
+
+        <div class="account-name-wrapper">
+          <p class="account-name">{{ originAccount()?.firstname }} {{ originAccount()?.lastname }}</p>
+          @if(isOrigin(originAccount()?.counterpartyId!)) {
+            <span class="badge-vos">VOS</span>
+          } 
+        </div>
         <p class="account-detail">CVU: {{ originAccount()?.cvu }}</p>
       </div>
 
@@ -36,7 +42,13 @@
           <mat-icon class="arrow-icon downward">arrow_downward</mat-icon>
           <span>Para</span>
         </div>
-        <p class="account-name">{{ counterpartyAccount()?.firstname }} {{ counterpartyAccount()?.lastname }}</p> 
+        <div class="account-name-wrapper">
+          <p class="account-name">{{ counterpartyAccount()?.firstname }} {{ counterpartyAccount()?.lastname }}</p>
+          @if(isOrigin(counterpartyAccount()?.counterpartyId!)) {
+            <span class="badge-vos">VOS</span>
+          } 
+        </div>
+        
         <p class="account-detail">CVU: {{ counterpartyAccount()?.cvu }}</p>
       </div>
 
