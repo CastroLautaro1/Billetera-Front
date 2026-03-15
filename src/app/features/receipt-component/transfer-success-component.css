@@ -1,0 +1,132 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.success-container {
+  max-width: 600px;
+  margin: 60px auto; 
+  padding: 20px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: transparent;
+}
+
+/* --- TÍTULO --- */
+.success-title {
+  color: var(--accent-primary);
+  font-size: 1.8rem;
+  font-weight: 400; 
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+/* --- TARJETA DEL DESTINATARIO --- */
+.recipient-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-medium); 
+  border-radius: 12px;
+  padding: 24px 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
+}
+
+.label-text {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.recipient-name {
+  color: var(--accent-primary);
+  font-size: 1.4rem;
+  font-weight: 450;
+  margin: 0 0 20px 0;
+}
+
+.cvu-text {
+  color: var(--accent-primary); 
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* --- GRUPOS DE INFORMACIÓN (Importe y Detalle) --- */
+.info-group {
+  margin-bottom: 30px;
+}
+
+.info-group span {
+  color: var(--text-main);
+  font-size: 1.3rem;
+}
+
+.info-group .amount-value {
+  color: var(--accent-primary);
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin: 8px 0 0 0;
+}
+
+.info-group .detail-value {
+  color: var(--accent-primary);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 8px 0 0 0;
+}
+
+/* --- BOTONES DE ACCIÓN --- */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 50px;
+}
+
+.action-buttons button {
+  flex: 1; 
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;     
+  justify-content: center; 
+  gap: 10px;
+}
+
+.action-buttons button:active {
+  transform: scale(0.98); 
+}
+
+.action-buttons mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  border-color: var(--accent-primary) !important;
+  background-color: var(--bg-main);
+  color: var(--accent-primary)
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-hover); 
+}
+
+/* --- ANIMACIÓN (Opcional pero recomendada) --- */
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

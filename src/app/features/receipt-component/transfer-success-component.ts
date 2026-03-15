@@ -1,29 +1,25 @@
-import { Component, inject, LOCALE_ID, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TransactionService } from '../../core/services/transaction-service';
 import { filter, map, switchMap } from 'rxjs';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { AccountService } from '../../core/services/account-service';
-import { DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FileDownloadService } from '../../core/services/file-download-service';
 
 
 @Component({
-  selector: 'app-receipt-component',
-  imports: [MatIcon, DatePipe],
-  providers: [{
-    provide: LOCALE_ID, useValue: 'es-AR'
-  }],
-  templateUrl: './receipt-component.html',
-  styleUrl: './receipt-component.css',
+  selector: 'app-transfer-success-component',
+  imports: [CommonModule, MatIcon, RouterLink],
+  templateUrl: './transfer-success-component.html',
+  styleUrl: './transfer-success-component.css',
 })
-export class ReceiptComponent {
+export class TransferSuccessComponent {
 
   private _route = inject(ActivatedRoute);
   private _transaction = inject(TransactionService);
   private _account = inject(AccountService);
-  private _router = inject(Router);
   private _fileDownload = inject(FileDownloadService);
 
   isDownloading = signal<boolean>(false);
@@ -57,10 +53,6 @@ export class ReceiptComponent {
     { initialValue : undefined }
   );
 
-  shareReceipt() {
-    
-  }
-
   downloadPDF() {
     const txId = this.transactionData()?.id;
     
@@ -82,10 +74,6 @@ export class ReceiptComponent {
         this.isDownloading.set(false);
       }
     });
-  }
-
-  goHome() {
-    this._router.navigate(['']);
   }
 
 }

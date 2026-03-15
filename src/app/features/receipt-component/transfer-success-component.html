@@ -1,0 +1,33 @@
+<div class="success-container fade-in">
+  
+  <h1 class="success-title">Transferencia exitosa</h1>
+
+  <div class="recipient-card">
+    <span class="label-text">Le transferiste a:</span>
+    <h2 class="recipient-name">
+      {{ counterpartyAccount()?.firstname || 'Destinatario' }} {{ counterpartyAccount()?.lastname || 'Desconocido' }}
+    </h2>
+    <span class="cvu-text">CVU: {{ counterpartyAccount()?.cvu || '0000000000000000000000' }}</span>
+  </div>
+
+  <div class="info-group">
+    <span class="label-text">Importe</span>
+    <h2 class="amount-value">${{ transactionData()?.amount | number:'1.2-2' }}</h2>
+  </div>
+
+  <div class="info-group">
+    <span class="label-text">Detalle</span>
+    <p class="detail-value">{{ transactionData()?.details || 'Varios' }}</p>
+  </div>
+
+  <div class="action-buttons">
+    <button class="btn-primary" (click)="downloadPDF()">
+      <mat-icon>picture_as_pdf</mat-icon>
+      {{ isDownloading() ? 'Generando PDF...' : 'Descargar comprobante' }}
+    </button>
+    <button class="btn-secondary" [routerLink]="['/']">
+      Volver a inicio
+    </button>
+  </div>
+
+</div>

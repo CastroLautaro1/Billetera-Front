@@ -50,9 +50,8 @@ export class TransferAmountComponent {
     }
   }
   
-  // signals para el monto y los detalles
+  // signal para el monto 
   rawAmount = signal<string>('');
-  transferDetails = signal<string>('');
 
   // calcular el valor matematico real del monto
   amount = computed(() => {
@@ -132,7 +131,7 @@ export class TransferAmountComponent {
     this._transaction.makeTransfer(dto).subscribe({
       next: (response) => {
         console.log("Transaccion completada: ", response);
-        this._router.navigate(['receipt', response.id], { replaceUrl : true });
+        this._router.navigate(['transfer-success', response.id], { replaceUrl : true });
       },
       error: (err) => {
         console.error("Error al realizar la transferencia: ", err);
