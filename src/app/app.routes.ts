@@ -8,14 +8,25 @@ import { HistoryComponent } from './features/history-component/history-component
 import { UserModalComponent } from './features/user-modal-component/user-modal-component';
 import { TransactionComponent } from './features/transaction-component/transaction-component';
 import { EditProfileComponent } from './features/edit-profile-component/edit-profile-component';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'auth', component: AuthComponent},
-    {path: 'transferContact', component: TransferContactComponent},
-    {path: 'transferAmount/:id', component: TransferAmountComponent},
-    {path: 'transfer-success/:id', component: TransferSuccessComponent},
-    {path: 'history', component: HistoryComponent},
-    {path: 'transaction/:id', component: TransactionComponent},
-    {path: 'editProfile', component: EditProfileComponent}
+    { path: 'auth', component: AuthComponent },
+    // Rutas protegidas
+    {
+        path: '',
+        canActivate: [authGuard], // Se aplica a todas las de abajo
+        children: [
+            { path: '', component: HomeComponent },
+            { path: 'transfer-contact', component: TransferContactComponent },
+            { path: 'transfer-amount/:id', component: TransferAmountComponent },
+            { path: 'transfer-success/:id', component: TransferSuccessComponent },
+            { path: 'history', component: HistoryComponent },
+            { path: 'transaction/:id', component: TransactionComponent },
+            { path: 'edit-profile', component: EditProfileComponent },
+        ]
+    },
+    { path: '**', redirectTo: '' } 
+
 ];
+

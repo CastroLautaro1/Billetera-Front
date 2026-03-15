@@ -74,7 +74,7 @@ export class TransferContactComponent {
   )
 
   goToAmount(accountId : number) {
-    this._router.navigate(['/transferAmount', accountId])
+    this._router.navigate(['/transfer-amount', accountId])
   }
 
   toHome() {
