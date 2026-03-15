@@ -1,59 +1,73 @@
-# BilleteraFront
+# 🍊 Oran - Billetera Virtual (Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-## Development server
+Frontend de **Oran**, una aplicación web de billetera virtual diseñada para ofrecer una experiencia de usuario fluida, rápida y moderna. Este proyecto consume una API RESTful construida en Spring Boot.
 
-To start a local development server, run:
+## 🎯 Características Principales
 
-```bash
-ng serve
-```
+* **Autenticación Segura:** Flujos de Login y Registro optimizados con validaciones reactivas en tiempo real.
+* **Dashboard Principal:** Una página de inicio que muestra todo lo necesario como el balance, acciones principales y transferencias recientes.
+* **Lista de Contactos:** Selección de contactos recientes y búsqueda de nuevos contactos mediante Alias o CVU.
+* **Selección de Monto:** Componente con identidad visual que permite introducir el monto y un detalle para poder transferir.
+* **Comprobantes Detallados:** Generación y visualización de recibos de transferencias con un diseño limpio e indicadores de usuario.
+* **Historial de Transacciones Dinámico:** Panel con paginación del lado del servidor (Server-side pagination) para manejar grandes volúmenes de datos sin perder rendimiento.
+* **Filtros Avanzados:** Búsqueda en tiempo real (con *debounce*) por nombre, rango de fechas, montos y tipos de transacción.
+* **Modo Oscuro/Claro Nativo:** Interfaz adaptable con variables CSS puras para una transición de temas perfecta y sin parpadeos.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 🛠️ Tecnologías Utilizadas
 
-## Code scaffolding
+* **Framework:** Angular
+* **Lenguaje:** TypeScript
+* **Estilos:** CSS3 (Variables globales, Flexbox, Grid, Animaciones y Keyframes)
+* **Manejo de Estado y Asincronía:** RxJS (Observables, Signals)
+* **Formularios:** Reactive Forms
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📸 Capturas de Pantalla
+![Image](https://github.com/user-attachments/assets/057cea9f-79c2-456e-90c5-3544a84ab1f2)
+![Image](https://github.com/user-attachments/assets/447f9608-4752-457a-94f3-2ee20b5c3d4a)
+![Image](https://github.com/user-attachments/assets/dedac122-4154-43f5-9aa7-a7b3761e2249)
+![Image](https://github.com/user-attachments/assets/ab88bd82-7a87-4cc0-a907-4cd570e162a0)
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## ⚙️ Instalación y Configuración Local
 
-```bash
-ng generate --help
-```
+Para correr este proyecto en tu entorno local, vas a necesitar tener instalado [Node.js](https://nodejs.org/) y Angular CLI.
 
-## Building
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/CastroLautaro1/Billetera-Front.git
+   ```
 
-To build the project run:
+2. **Navegar al directorio del proyecto:**
 
-```bash
-ng build
-```
+    ```bash
+    cd Billetera-Front
+    ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+3. **Instalar las dependencias:**
 
-## Running unit tests
+    ```bash
+    npm install
+    ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+4. **Ejecutar el servidor de desarrollo:**
 
-```bash
-ng test
-```
+    ```bash
+    ng serve
+    ```
 
-## Running end-to-end tests
+## 📂 Estructura del Proyecto
+El proyecto sigue una arquitectura modular y escalable típica de Angular:
 
-For end-to-end (e2e) testing, run:
+* **/core:** Servicios singleton (HTTP, Autenticación, Guards).
 
-```bash
-ng e2e
-```
+* **/shared:** Componentes reutilizables, modelos e interfaces.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+* **/features:** Módulos principales de la aplicación (Auth, Home, History, Transaction).
 
-## Additional Resources
+## 👨‍💻 Autor
+**Lautaro Castro** - Full Stack Developer - [LinkedIn](https://www.linkedin.com/in/lautaro-castro-dev/) 
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
