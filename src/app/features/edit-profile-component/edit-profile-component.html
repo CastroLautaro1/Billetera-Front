@@ -29,11 +29,9 @@
                 <div class="error-container">
                   @if (formData.controls.firstname.hasError('required')) {
                     <span class="error-text">El nombre es obligatorio.</span>
-                  }
-                  @if (formData.controls.firstname.hasError('minlength')) {
+                  } @else if (formData.controls.firstname.hasError('minlength')) {
                     <span class="error-text">Debe tener al menos 2 caracteres.</span>
-                  }
-                  @if (formData.controls.firstname.hasError('maxlength')) {
+                  } @else if (formData.controls.firstname.hasError('maxlength')) {
                     <span class="error-text">No puede superar los 50 caracteres.</span>
                   }
                 </div>
@@ -50,15 +48,13 @@
                 formControlName="lastname"
                 [class.input-error]="formData.controls.lastname.invalid && formData.controls.lastname.touched">
 
-              @if (formData.controls.lastname.invalid && formData.controls.lastname.touched) {
+               @if (formData.controls.lastname.invalid && formData.controls.lastname.touched) {
                 <div class="error-container">
                   @if (formData.controls.lastname.hasError('required')) {
                     <span class="error-text">El apellido es obligatorio.</span>
-                  }
-                  @if (formData.controls.lastname.hasError('minlength')) {
+                  } @else if (formData.controls.lastname.hasError('minlength')) {
                     <span class="error-text">Debe tener al menos 2 caracteres.</span>
-                  }
-                  @if (formData.controls.lastname.hasError('maxlength')) {
+                  } @else if (formData.controls.lastname.hasError('maxlength')) {
                     <span class="error-text">No puede superar los 50 caracteres.</span>
                   }
                 </div>
@@ -81,7 +77,7 @@
                 @if (formData.controls.email.hasError('required')) {
                   <span class="error-text">El email es obligatorio.</span>
                 }
-                @if (formData.controls.email.hasError('email')) {
+                @else if (formData.controls.email.hasError('email')) {
                   <span class="error-text">Debe tener formato de Email</span>
                 }
               </div>
@@ -103,10 +99,10 @@
                 @if (formData.controls.alias.hasError('required')) {
                   <span class="error-text">El alias es obligatorio.</span>
                 }
-                @if (formData.controls.alias.hasError('minlength')) {
+                @else if (formData.controls.alias.hasError('minlength')) {
                   <span class="error-text">Debe tener al menos 4 caracteres.</span>
                 }
-                @if (formData.controls.alias.hasError('maxlength')) {
+                @else if (formData.controls.alias.hasError('maxlength')) {
                   <span class="error-text">No puede superar los 20 caracteres.</span>
                 }
               </div>
@@ -163,13 +159,13 @@
                 @if (formPassword.controls.newPassword.hasError('required')) {
                   <span class="error-text">La contraseña es obligatoria.</span>
                 }
-                @if (formPassword.controls.newPassword.hasError('minlength')) {
+                @else if (formPassword.controls.newPassword.hasError('minlength')) {
                   <span class="error-text">La contraseña debe tener al menos 8 caracteres.</span>
                 }
-                @if (formPassword.controls.newPassword.hasError('missingUppercase')) {
+                @else if (formPassword.controls.newPassword.hasError('missingUppercase')) {
                   <span class="error-text">La contraseña debe contener al menos una mayúscula.</span>
                 }
-                @if (formPassword.controls.newPassword.hasError('missingNumber')) {
+                @else if (formPassword.controls.newPassword.hasError('missingNumber')) {
                   <span class="error-text">La contraseña debe contener al menos un número.</span>
                 }
               </div>

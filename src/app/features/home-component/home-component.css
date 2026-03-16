@@ -233,7 +233,7 @@
   color: var(--accent-light);
 }
 
-/* --- EMPTY STATE --- */
+/* --- Empty State (para cuando no hay transacciones) --- */
 .empty-state {
   display: flex;
   flex-direction: column;

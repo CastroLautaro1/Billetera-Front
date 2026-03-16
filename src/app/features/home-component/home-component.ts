@@ -20,7 +20,6 @@ export class HomeComponent {
   private _account = inject(AccountService);
   private _user = inject(UserService);
   private _transaction = inject(TransactionService);
-  private _router = inject(Router);
   private _dialog = inject(MatDialog);
   amountVisible = true;
 

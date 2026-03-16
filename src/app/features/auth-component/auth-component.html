@@ -25,10 +25,10 @@
                    [class.input-error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
           </div>
          
-          @if (loginForm.get('email')?.touched) {
-            @if (loginForm.get('email')?.hasError('required')) {
+          @if (loginForm.controls.email.touched) {
+            @if (loginForm.controls.email.hasError('required')) {
               <span class="error-text">El email es requerido</span>
-            } @else if (loginForm.get('email')?.hasError('email')) {
+            } @else if (loginForm.controls.email.hasError('email')) {
               <span class="error-text">Ingresa un formato válido</span>
             }
           }
@@ -54,9 +54,9 @@
               <mat-icon>{{ hidePasswordLogin() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
           </div>
-          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+          @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
             <span class="error-text">La contraseña es requerida</span>
-          } @else if (loginForm.get('password')?.hasError('minlength')) {
+          } @else if (loginForm.controls.password.hasError('minlength')) {
             <span class="error-text">La contraseña debe tener 8 caracteres mínimo</span>
           }
 
@@ -82,8 +82,14 @@
               <input type="text" class="oran-input" formControlName="firstname" placeholder="Juan"
                      [class.input-error]="registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched">
             </div>
-            @if (registerForm.get('firstname')?.invalid && registerForm.get('firstname')?.touched) {
-              <span class="error-text">Obligatorio</span>
+            @if (registerForm.controls.firstname.touched) {
+              @if (registerForm.controls.firstname.hasError('required')) {
+                <span class="error-text">El nombre es obligatorio</span>
+              } @else if (registerForm.controls.firstname.hasError('minlength')) {
+                <span class="error-text">Mínimo 2 caracteres</span>
+              } @else if (registerForm.controls.firstname.hasError('maxlength')) {
+                <span class="error-text">No puede superar los 50 caracteres</span>
+              }
             }
 
           </div>
@@ -96,8 +102,14 @@
               <input type="text" class="oran-input" formControlName="lastname" placeholder="Pérez"
                      [class.input-error]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched">
             </div>
-            @if (registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched) {
-              <span class="error-text">Obligatorio</span>
+            @if (registerForm.controls.lastname.touched) {
+              @if (registerForm.controls.lastname.hasError('required')) {
+                <span class="error-text">El apellido es obligatorio</span>
+              } @else if (registerForm.controls.lastname.hasError('minlength')) {
+                <span class="error-text">Mínimo 2 caracteres</span>
+              } @else if (registerForm.controls.lastname.hasError('maxlength')) {
+                <span class="error-text">No puede superar los 50 caracteres</span>
+              }
             }
           </div>
 
@@ -110,10 +122,10 @@
             <input type="email" class="oran-input" formControlName="email" placeholder="tu@email.com"
                    [class.input-error]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
           </div>
-          @if (registerForm.get('email')?.touched) {
-            @if (registerForm.get('email')?.hasError('required')) {
-              <span class="error-text">El email es requerido</span>
-            } @else if (registerForm.get('email')?.hasError('email')) {
+          @if (registerForm.controls.email.touched) {
+            @if (registerForm.controls.email.hasError('required')) {
+              <span class="error-text">El email es obligatorio</span>
+            } @else if (registerForm.controls.email.hasError('email')) {
               <span class="error-text">Ingresa un formato válido</span>
             }
           }
@@ -138,12 +150,14 @@
               <mat-icon>{{ hidePasswordRegister() ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
           </div>
-          @if (registerForm.get('password')?.touched) {
-            @if (registerForm.get('password')?.hasError('required')) {
-              <span class="error-text">La contraseña es requerida</span>
-            } @else if (registerForm.get('password')?.hasError('minlength')) {
-              <span class="error-text">Mínimo 6 caracteres</span>
-            }
+          @if (registerForm.controls.password.touched && registerForm.controls.password.hasError('required')) {
+              <span class="error-text">La contraseña es obligatoria</span>
+          } @else if (registerForm.controls.password.hasError('minlength')) {
+            <span class="error-text">Mínimo 8 caracteres</span>
+          } @else if (registerForm.controls.password.hasError('missingUppercase')) {
+            <span class="error-text">La contraseña debe contener al menos una mayúscula.</span>
+          } @else if (registerForm.controls.password.hasError('missingNumber')) {
+            <span class="error-text">La contraseña debe contener al menos un número.</span>
           }
 
         </div>

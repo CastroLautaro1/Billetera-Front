@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
 import { UserService } from '../../core/services/user-service';
 import { AccountService } from '../../core/services/account-service';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { UpdateUserDTO } from '../../shared/models/UpdateUserDTO';
@@ -45,7 +45,7 @@ export class EditProfileComponent {
   formData = this._fb.group({
     firstname: [this.userData()?.firstname,[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     lastname: [this.userData()?.lastname, [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    email: [this.userData()?.email, [Validators.email, Validators.required]],
+    email: [this.userData()?.email, [Validators.required, Validators.email]],
     alias: [this.accountData()?.alias, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
   });
 
@@ -79,10 +79,7 @@ export class EditProfileComponent {
 
 
   updateUser() {
-
-    console.log("Entra")
-
-    // if(this.formData.invalid) return;
+    if(this.formData.invalid) return;
 
     const profileData: UpdateUserDTO = {
       firstname: this.formData.controls.firstname.value!,

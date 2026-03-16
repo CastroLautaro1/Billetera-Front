@@ -5,6 +5,7 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { Login } from '../../shared/models/Login';
 import { Register } from '../../shared/models/Register';
 import { MatIcon } from '@angular/material/icon';
+import { strongPasswordValidator } from '../../core/validators/custom-validators';
 
 @Component({
   selector: 'app-auth-component',
@@ -31,8 +32,8 @@ export class AuthComponent {
   registerForm = this._form.group({
     firstname: ['',[Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.minLength(8), Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8), strongPasswordValidator]],
   });
 
   submit() {
