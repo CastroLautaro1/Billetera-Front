@@ -1,16 +1,24 @@
-/* app.component.css */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+header {
+  flex-shrink: 0;
+}
+
 main {
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
+  justify-content: center;
+  flex-grow: 1; 
   width: 100%;
-  min-height: calc(100vh - 64px); /* Resta la altura del navbar */
   padding: 20px;
   box-sizing: border-box;
 }
 
-/* Esta es la clave: el contenedor de la ruta actual */
 .router-container {
   width: 100%;
-  max-width: 1100px; /* Ancho estandar para toda la app */
+  max-width: 1100px;
   margin: 0 auto;
 }

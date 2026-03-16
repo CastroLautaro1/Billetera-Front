@@ -3,7 +3,7 @@
   /* =========================================
      1. COLORES DE MARCA (Naranjas)
      ========================================= */
-  --accent-primary: #ff6600;     /* Tu color principal */
+  --accent-primary: #ff6600;     /* Color principal */
   --accent-hover: #e65c00;       /* Naranja un poco más oscuro para botones en hover */
   --accent-light: #fff0e6;       /* Naranja muy pastel (ideal para el fondo de los iconos de depósito) */
   
@@ -17,8 +17,8 @@
   /* =========================================
      3. TEXTOS Y TIPOGRAFÍA
      ========================================= */
-  --text-main: #1a1f2b;          /* Azul/Gris muy oscuro (más elegante que el negro puro) */
-  --text-muted: #6c757d;         /* Gris medio para subtítulos (como "transferencia enviada") */
+  --text-main: #1a1f2b;          /* Azul/Gris muy oscuro para el texto principal */
+  --text-muted: #6c757d;         /* Gris medio para subtítulos */
   --text-placeholder: #adb5bd;   /* Gris claro para el input de búsqueda o fechas */
   
   /* =========================================
@@ -32,7 +32,7 @@
      ========================================= */
   --success: #28a745;            /* Verde para ingresos de dinero y mensajes de éxito */
   --danger: #dc3545;             /* Rojo para errores o egresos fuertes */
-  --warning: #ffc107;            /* Amarillo para transacciones "pendientes" */
+  --warning: #ffc107;            
 }
 
 /* Variables para el Modo Oscuro */
@@ -62,23 +62,23 @@
   --warning: #e3b341;
 }
 
-
 body {
   background-color: var(--bg-main);
   color: var(--text-main);
   transition: background-color 0.3s ease, color 0.3s ease; 
+  overflow-x: hidden;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-/* --- Estilos del SnackBar --- */
+/* --- ESTILOS DEL SNACKBAR --- */
 .oran-snackbar .mdc-snackbar__surface {
   background-color: var(--bg-card) !important; /* Fondo oscuro */
   border-radius: 12px !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
 }
-/* --- Colores del SnackBar --- */
+/* --- COLORES DEL SNACKBAR --- */
 
 /* Exito (Naranaja) */
 .snack-success .mdc-snackbar__surface { border: 1px solid var(--accent-primary) !important; }
@@ -91,6 +91,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* Info (Naranja) */
 .snack-info .mdc-snackbar__surface { border: 1px solid var(--accent-primary) !important; }
 .snack-info mat-icon { color: var(--accent-primary) !important; }
+
 
 /* --- OVERRIDE PARA TABS DE MATERIAL --- */
 .oran-tabs .mdc-tab__text-label {
