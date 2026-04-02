@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Transaction } from '../../shared/models/Transaction';
 import { Page } from '../../shared/models/Page';
@@ -17,8 +17,11 @@ export class TransactionService {
     return this.http.get<Page<Transaction>>(`${this.API_URL}/history?page=${page}&size=${size}`);
   }
 
-  makeTransfer(transferData: TransactionDTO) {
-    return this.http.post<Transaction>(`${this.API_URL}/transfer`, transferData);
+  makeTransfer(transferData: TransactionDTO, idempotenceKey: string) {
+    
+    const headers = new HttpHeaders().set('Idempotency-Key', idempotenceKey)
+
+    return this.http.post<Transaction>(`${this.API_URL}/transfer`, transferData, { headers: headers });
   }
 
   getById(transactionId: number) {
