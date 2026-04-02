@@ -51,9 +51,13 @@
 
     <div class="action-container">
       <button class="btn-outline-primary" 
-        [disabled]="!isValidTransfer()"
+        [disabled]="!isValidTransfer() || isSubmitting()"
         (click)="makeTransfer()">
-        Confirmar
+        @if(isSubmitting()) {
+          Procesando...
+        } @else {
+          Confirmar
+        }
       </button>
     </div>
   </div>

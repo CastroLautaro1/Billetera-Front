@@ -20,6 +20,13 @@ export class TransferAmountComponent {
   private _transaction = inject(TransactionService);
   private _router = inject(Router);
 
+  private currentIdempotencyKey: string = '';
+  isSubmitting = signal(false); 
+
+  ngOnInit() {
+    this.currentIdempotencyKey = crypto.randomUUID();
+  }
+
   private accountId$ = this._route.paramMap.pipe(
     map(param => param.get('id')),
     map(id => id ? Number(id) : null),
@@ -113,7 +120,7 @@ export class TransferAmountComponent {
 
   makeTransfer() {
     // doble validacion por si el html fue vulnerado
-    if (!this.isValidTransfer) return;
+    if (!this.isValidTransfer || this.isSubmitting()) return;
 
     const destination = this.counterpartyData()?.cvu || this.counterpartyData()?.alias;
 
@@ -128,7 +135,13 @@ export class TransferAmountComponent {
       details: this.selectedDetail
     }
 
-    this._transaction.makeTransfer(dto).subscribe({
+    if(!this.currentIdempotencyKey) {
+      this.currentIdempotencyKey = crypto.randomUUID(); // Vuelvo a generar la clave por las dudas
+    }
+
+    this.isSubmitting.set(true);
+
+    this._transaction.makeTransfer(dto, this.currentIdempotencyKey).subscribe({
       next: (response) => {
         console.log("Transaccion completada: ", response);
         this._router.navigate(['transfer-success', response.id], { replaceUrl : true });
