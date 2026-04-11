@@ -1,5 +1,5 @@
 export interface AccountPublicData {
-    counterpartyId: number,
+    accountId: number,
     firstname: string,
     lastname: string,
     alias: string,

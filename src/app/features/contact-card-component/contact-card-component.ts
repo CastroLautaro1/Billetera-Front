@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { AccountService } from '../../core/services/account-service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { filter, switchMap } from 'rxjs';
+import { catchError, filter, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-contact-card-component',
@@ -16,7 +16,11 @@ export class ContactCardComponent {
 
   accountData$ = toObservable(this.accountId).pipe(
     filter((accountId): accountId is number => !!accountId),
-    switchMap(accountId => this._account.getAccountPublicData(accountId))
+    switchMap(accountId => 
+      this._account.getAccountPublicData(accountId).pipe(
+        catchError(() => of(null))
+      )
+    )
   );
 
   accountData = toSignal(this.accountData$, {initialValue : undefined});
