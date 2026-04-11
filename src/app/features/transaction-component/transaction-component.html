@@ -29,12 +29,12 @@
         </div>
 
         <div class="account-name-wrapper">
-          <p class="account-name">{{ originAccount()?.firstname }} {{ originAccount()?.lastname }}</p>
-          @if(isOrigin(originAccount()?.counterpartyId!)) {
+          <p class="account-name">{{ transaction()?.originFullname }}</p>
+          @if(isOrigin(transaction()?.originCvu!)) {
             <span class="badge-vos">VOS</span>
           } 
         </div>
-        <p class="account-detail">CVU: {{ originAccount()?.cvu }}</p>
+        <p class="account-detail">CVU: {{ transaction()?.originCvu }}</p>
       </div>
 
       <div class="account-card">
@@ -43,13 +43,13 @@
           <span>Para</span>
         </div>
         <div class="account-name-wrapper">
-          <p class="account-name">{{ counterpartyAccount()?.firstname }} {{ counterpartyAccount()?.lastname }}</p>
-          @if(isOrigin(counterpartyAccount()?.counterpartyId!)) {
+          <p class="account-name">{{ transaction()?.destinationFullname }}</p>
+          @if(isOrigin(transaction()?.destinationCvu!)) {
             <span class="badge-vos">VOS</span>
           } 
         </div>
         
-        <p class="account-detail">CVU: {{ counterpartyAccount()?.cvu }}</p>
+        <p class="account-detail">CVU: {{ transaction()?.destinationCvu }}</p>
       </div>
 
     </div>

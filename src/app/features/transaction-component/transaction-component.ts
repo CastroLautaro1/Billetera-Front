@@ -33,11 +33,12 @@ export class TransactionComponent {
 
   transaction = toSignal(
     this.transactionId$.pipe(
-      switchMap(id => this._transaction.getById(id))
+      switchMap(id => this._transaction.getTransactionReceiptInfo(id))
     ),
     { initialValue : undefined }
   );
 
+  /*
   originAccount = toSignal(
     toObservable(this.transaction).pipe(
       filter(tx => tx?.originAccountId !== undefined && tx.originAccountId !== null),
@@ -53,6 +54,7 @@ export class TransactionComponent {
     ),
     { initialValue : undefined }
   );
+*/
 
   userAccount = toSignal(
     this._account.getProfile(),
@@ -89,14 +91,16 @@ export class TransactionComponent {
     return `REF-${paddedId}`;
   }
 
+  
   isEntry(): boolean {
     if (this.transaction()?.transactionType === 'DEPOSIT') return true;
 
-    return this.transaction()?.transactionType === 'TRANSFER' && this.transaction()?.counterpartyAccountId === this.userAccount()?.id;
+    return this.transaction()?.transactionType === 'TRANSFER' && this.transaction()?.originCvu !== this.userAccount()?.cvu;
   }
 
+
   // Determina si el Usuario logueado es el origen o la contraparte de la transaccion
-  isOrigin(accountId: number) {
-    return this.userAccount()?.id === accountId;
+  isOrigin(cvu: string) {
+    return this.userAccount()?.cvu === cvu;
   }
 }

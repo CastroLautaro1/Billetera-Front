@@ -4,6 +4,7 @@ import { Transaction } from '../../shared/models/Transaction';
 import { Page } from '../../shared/models/Page';
 import { TransactionDTO } from '../../shared/models/TransactionDTO';
 import { Observable } from 'rxjs';
+import { TransactionReceiptInfo } from '../../shared/models/TransactionReceiptInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,10 @@ export class TransactionService {
 
   getById(transactionId: number) {
     return this.http.get<Transaction>(`${this.API_URL}/${transactionId}`);
+  }
+
+  getTransactionReceiptInfo(transactionId: number) {
+    return this.http.get<TransactionReceiptInfo>(`${this.API_URL}/info/${transactionId}`);
   }
 
   downloadReceiptPdf(id: number): Observable<Blob> {
