@@ -7,6 +7,7 @@ import { AccountService } from '../../core/services/account-service';
 import { filter, map, switchMap } from 'rxjs';
 import { TransactionService } from '../../core/services/transaction-service';
 import { TransactionDTO } from '../../shared/models/TransactionDTO';
+import { NotificationService } from '../../core/services/notification-service';
 
 @Component({
   selector: 'app-transfer-amount-component',
@@ -19,6 +20,7 @@ export class TransferAmountComponent {
   private _account = inject(AccountService);
   private _transaction = inject(TransactionService);
   private _router = inject(Router);
+  private _notify = inject(NotificationService);
 
   private currentIdempotencyKey: string = '';
   isSubmitting = signal(false); 
@@ -148,6 +150,8 @@ export class TransferAmountComponent {
       },
       error: (err) => {
         console.error("Error al realizar la transferencia: ", err);
+        this.isSubmitting.set(false);
+        this._notify.error(err.error.message);
       }
     })
   }
