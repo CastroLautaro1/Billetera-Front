@@ -16,6 +16,7 @@ export const routes: Routes = [
     {
         path: '',
         canActivate: [authGuard], // Se aplica a todas las de abajo
+        canActivateChild: [authGuard],
         children: [
             { path: '', component: HomeComponent },
             { path: 'transfer-contact', component: TransferContactComponent },
@@ -29,4 +30,3 @@ export const routes: Routes = [
     { path: '**', redirectTo: '' } 
 
 ];
-
