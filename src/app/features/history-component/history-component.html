@@ -23,17 +23,30 @@
         <div class="transaction-card" (click)="goTransaction(tx.id)">
           <div class="card-left">
             <div class="icon-circle-oran">
-              <mat-icon>{{ isEntry(tx) ? "south_west" : "send" }}</mat-icon>
+              <mat-icon>
+                @if (tx.transactionType === 'DEPOSIT') {
+                  account_balance_wallet
+                } @else {
+                  {{ isEntry(tx) ? 'south_west' : 'send_money'}}
+                }
+              </mat-icon>
             </div>
             <div class="info">
               <h3>
-                <app-user-fullname-component
-                  [accountId]=" tx.counterpartyAccountId === userAccount()?.id ? tx.originAccountId : tx.counterpartyAccountId">
-                </app-user-fullname-component>
+                @if (tx.transactionType === 'TRANSFER') {
+                  <app-user-fullname-component 
+                    [accountId]="tx.counterpartyAccountId === userAccount()?.id ? tx.originAccountId : tx.counterpartyAccountId">
+                  </app-user-fullname-component>
+                } 
+                @else if(tx.transactionType === 'DEPOSIT') {
+                  Mercado Pago
+                } 
               </h3>
-              @if (tx.transactionType === "TRANSFER") {
-                <p>{{ isEntry(tx) ? "Transferencia recibida" : "Transferencia enviada" }}</p>
-              }
+                @if (tx.transactionType === 'TRANSFER') {
+                  {{ isEntry(tx) ? 'Transferencia recibida' : 'Transferencia enviada' }}
+                } @else if (tx.transactionType === 'DEPOSIT') {
+                  Recarga de saldo
+                }
             </div>
           </div>
           <div class="card-right" [class.positive]="isEntry(tx)">

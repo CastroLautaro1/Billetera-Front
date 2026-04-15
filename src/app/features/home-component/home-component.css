@@ -229,7 +229,7 @@
 
 .icon-box.deposit {
   background-color: var(--accent-light);
-  color: var(--accent-light);
+  color: var(--accent-primary);
 }
 
 /* --- Empty State (para cuando no hay transacciones) --- */

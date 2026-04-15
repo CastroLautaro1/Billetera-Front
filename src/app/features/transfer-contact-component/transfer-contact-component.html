@@ -20,8 +20,8 @@
         <h2>Resultado de la busqueda</h2>
         <div class="contacts-list">
             <app-contact-card-component 
-                [accountId]="searchResult()!.counterpartyId" 
-                (click)="goToAmount(searchResult()!.counterpartyId)">
+                [accountId]="searchResult()!.accountId" 
+                (click)="goToAmount(searchResult()!.accountId)">
             </app-contact-card-component>
         </div>
     } @else {
