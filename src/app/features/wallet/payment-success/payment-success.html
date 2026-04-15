@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+  <div class="card shadow-sm p-5 text-center" style="max-width: 500px; border-radius: 15px;">
+    <div class="mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="#28a745" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>
+    </div>
+    
+    <h2 class="text-success mb-3">¡Recarga Exitosa!</h2>
+    <p class="text-muted fs-5">Tu pago fue procesado correctamente. El saldo ya debería estar disponible en tu billetera Oran.</p>
+    
+    @if (paymentId) {
+      <div class="alert alert-success mt-3">
+        <strong>N° de Operación:</strong> {{ paymentId }}
+      </div>
+    }
+
+    <button routerLink="/" class="btn btn-primary btn-lg mt-4 w-100">
+      Volver al Inicio
+    </button>
+  </div>
+</div>
