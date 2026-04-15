@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+  <div class="card shadow-sm p-5" style="max-width: 450px; width: 100%; border-radius: 15px;">
+    
+    <h3 class="text-center mb-4">Ingresar Dinero</h3>
+    
+    <div class="mb-4">
+      <label class="form-label text-muted">¿Cuánto querés recargar?</label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-text">$</span>
+        <input 
+          type="number" 
+          class="form-control font-weight-bold" 
+          [(ngModel)]="amount" 
+          placeholder="0.00"
+          [disabled]="isLoading">
+      </div>
+      
+      @if (errorMessage) {
+        <div class="text-danger mt-2 small">
+            {{ errorMessage }}
+        </div>
+      }
+    </div>
+
+    <button 
+      class="btn btn-primary btn-lg w-100" 
+      (click)="onDeposit()" 
+      [disabled]="isLoading || !amount">
+
+      @if(!isLoading) {
+        <span>Continuar a Mercado Pago</span>
+      } @else if (isLoading) {
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        <span>Generando link...</span>
+      }
+      
+    </button>
+    
+    <div class="text-center mt-3">
+      <button routerLink="/" class="btn btn-link text-muted text-decoration-none">Cancelar</button>
+    </div>
+
+  </div>
+</div>
