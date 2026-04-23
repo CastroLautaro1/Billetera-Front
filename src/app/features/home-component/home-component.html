@@ -15,7 +15,7 @@
   </div>
 
   <div class="actions-grid">
-    <div class="action-item" [routerLink]="['/deposit']">
+    <div class="action-item" (click)="openDepositModal()">
       <div class="action-icon"><mat-icon>add</mat-icon></div>
       <span>Depositar</span>
     </div>

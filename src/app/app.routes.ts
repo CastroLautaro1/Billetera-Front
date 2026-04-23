@@ -5,14 +5,12 @@ import { TransferContactComponent } from './features/transfer-contact-component/
 import { TransferAmountComponent } from './features/transfer-amount-component/transfer-amount-component';
 import { TransferSuccessComponent } from './features/receipt-component/transfer-success-component';
 import { HistoryComponent } from './features/history-component/history-component';
-import { UserModalComponent } from './features/user-modal-component/user-modal-component';
 import { TransactionComponent } from './features/transaction-component/transaction-component';
 import { EditProfileComponent } from './features/edit-profile-component/edit-profile-component';
 import { authGuard } from './core/guards/auth-guard';
 import { PaymentSuccess } from './features/wallet/payment-success/payment-success';
 import { PaymentPending } from './features/wallet/payment-pending/payment-pending';
 import { PaymentError } from './features/wallet/payment-error/payment-error';
-import { Deposit } from './features/wallet/deposit/deposit';
 
 export const routes: Routes = [
     { path: 'auth', component: AuthComponent },
@@ -31,8 +29,7 @@ export const routes: Routes = [
             { path: 'edit-profile', component: EditProfileComponent },
             { path: 'payment-success', component: PaymentSuccess },
             { path: 'payment-pending', component: PaymentPending },
-            { path: 'payment-error', component: PaymentError },
-            { path: 'deposit', component: Deposit }
+            { path: 'payment-error', component: PaymentError }
         ]
     },
     { path: '**', redirectTo: '' } 

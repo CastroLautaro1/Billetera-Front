@@ -71,6 +71,17 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/* Estilos para el modal del DepositComponent*/
+.oran-modal-container {
+  .mdc-dialog__surface {
+    background-color: var(--bg-card);
+    border-radius: 16px !important; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
 
 /* --- ESTILOS DEL SNACKBAR --- */
 .oran-snackbar .mdc-snackbar__surface {

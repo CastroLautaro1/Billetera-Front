@@ -6,9 +6,10 @@ import { UserService } from '../../core/services/user-service';
 import { TransactionService } from '../../core/services/transaction-service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UserFullnameComponent } from '../../shared/components/user-fullname-component/user-fullname-component';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { UserModalComponent } from '../user-modal-component/user-modal-component';
+import { DepositComponent } from '../wallet/deposit-component/deposit-component';
 
 @Component({
   selector: 'app-home-component',
@@ -31,12 +32,12 @@ export class HomeComponent {
   userData = toSignal(
     this._user.getProfile(),
     {initialValue : undefined}
-  )
+  );
 
   transactionHistory = toSignal(
     this._transaction.getHistory(0, 3),
     {initialValue : undefined}
-  )
+  );
 
   // Metodo para determinar si una transaccion es un ingreso o egreso
   isEntry(t: any): boolean {
@@ -49,6 +50,14 @@ export class HomeComponent {
     this._dialog.open(UserModalComponent, {
       width: '450px',          
       panelClass: 'custom-modal-container', 
+      autoFocus: false
+    })
+  }
+
+  openDepositModal() {
+    this._dialog.open(DepositComponent, {
+      width: '450px',          
+      panelClass: 'oran-modal-container', 
       autoFocus: false
     })
   }
