@@ -12,6 +12,7 @@ import { TransactionReceiptInfo } from '../../shared/models/TransactionReceiptIn
 export class TransactionService {
   private http = inject(HttpClient);
   private readonly API_URL = 'http://localhost:8080/transaction';
+  private readonly API_PAYMENT = 'http://localhost:8080/payments';
 
   /* Obtiene el historial de las transacciones realizadas por el usuario logueado */
   getHistory(page: number = 0, size: number = 10) {
@@ -74,6 +75,13 @@ export class TransactionService {
     }
 
     return this.http.get<Page<Transaction>>(`${this.API_URL}/history`, { params });
+  }
+
+  /*Metodo para realiar un deposito*/ 
+  createDepositPreference(amount: number, userEmail: string): Observable<string> {
+    const body = { amount, userEmail };
+    
+    return this.http.post(`${this.API_PAYMENT}/deposit`, body, { responseType: 'text' });
   }
 
 }

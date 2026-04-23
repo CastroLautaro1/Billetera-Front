@@ -1,0 +1,201 @@
+/* Encabezado */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+
+  .header-text {
+    h2 {
+      margin: 0 0 4px 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      color: var(--accent-primary);
+    }
+  }
+}
+
+/* Cuerpo y Formularios */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+}
+
+/* Input de Monto */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-main); 
+  border-radius: 10px;
+  padding: 0 16px;
+  height: 48px;
+
+  .currency {
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 8px;
+  }
+
+  input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-main);
+    width: 100%;
+
+    &::placeholder {
+      color: var(--text-placeholder);
+    }
+    
+    /* Ocultar flechitas de número */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+}
+
+/* Estilos para el mensaje de error */
+.error-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--danger);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 2px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Borde rojo para el input sí hay error*/
+.input-wrapper.has-error {
+  border: 1px solid var(--danger);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Opción de Método de Pago */
+.payment-option {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  .icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    margin-right: 12px;
+  }
+
+  .option-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+  }
+
+  /* Estado activo (Seleccionado) con color naranja */
+  &.active {
+    border: 2px solid var(--accent-primary); 
+    background-color: var(--accent-light); 
+    
+    .icon-box {
+      color: var(--accent-primary);
+    }
+  }
+
+  &:hover:not(.active) {
+    border-color: var(--accent-hover);
+  }
+}
+
+/* Pie y Botones */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+
+    &:hover {
+      background-color: var(--bg-hover);
+    }
+  }
+
+  .btn-primary {
+    background-color: var(--accent-primary); 
+    border: none;
+    color: white;
+
+    &:hover {
+      background-color: var(--accent-hover);
+    }
+
+    &:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+    }
+  }
+}

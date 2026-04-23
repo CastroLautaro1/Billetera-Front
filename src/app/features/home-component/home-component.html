@@ -15,7 +15,7 @@
   </div>
 
   <div class="actions-grid">
-    <div class="action-item">
+    <div class="action-item" (click)="openDepositModal()">
       <div class="action-icon"><mat-icon>add</mat-icon></div>
       <span>Depositar</span>
     </div>
@@ -43,18 +43,32 @@
         <div class="transaction-item" [routerLink]="['/transaction', t.id]">
           <div class="transaction-info">
             <div class="icon-box" [class.deposit]="t.transactionType === 'DEPOSIT'">
-              
-              <mat-icon>{{ isEntry(t) ? 'south_west' : 'send_money'}}</mat-icon>
+              <mat-icon>
+                @if (t.transactionType === 'DEPOSIT') {
+                  account_balance_wallet
+                } @else {
+                  {{ isEntry(t) ? 'south_west' : 'send_money'}}
+                }
+              </mat-icon>
             </div>
             <div class="details">
               <p class="title">
-                <app-user-fullname-component 
-                [accountId]="t.counterpartyAccountId === userAccount()?.id ? t.originAccountId : t.counterpartyAccountId">
-                </app-user-fullname-component>
+                @if (t.transactionType === 'TRANSFER') {
+                  <app-user-fullname-component 
+                    [accountId]="t.counterpartyAccountId === userAccount()?.id ? t.originAccountId : t.counterpartyAccountId">
+                  </app-user-fullname-component>
+                } 
+                @else if(t.transactionType === 'DEPOSIT') {
+                  Mercado Pago
+                } 
               </p>
-              @if (t.transactionType === 'TRANSFER') {
-                <p class="subtitle">{{ isEntry(t) ? 'Transferencia recibida' : 'Transferencia enviada' }}</p>
-              }
+              <p class="subtitle">
+                @if (t.transactionType === 'TRANSFER') {
+                  {{ isEntry(t) ? 'Transferencia recibida' : 'Transferencia enviada' }}
+                } @else if (t.transactionType === 'DEPOSIT') {
+                  Recarga de saldo
+                }
+              </p>
             </div>
           </div>
 
