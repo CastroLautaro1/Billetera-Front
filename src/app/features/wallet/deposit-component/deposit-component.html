@@ -1,0 +1,54 @@
+<div class="modal-header">
+  
+  <div class="header-text">
+    <h2>Agregar Dinero</h2>
+    <p>Ingresá el monto y continuá con Mercado Pago</p>
+  </div>
+
+  <button mat-icon-button class="close-btn" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+</div>
+
+<div class="modal-body">
+
+  <div class="form-group">
+    <label>Monto</label>
+    <div class="input-wrapper" [class.has-error]="errorMessage">
+      <span class="currency">$</span>
+      <input type="number" placeholder="0.00" min="100" [(ngModel)]="amount" />
+    </div>
+
+    @if (errorMessage) {
+      <span class="error-text">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+        </svg>
+        {{ errorMessage }}
+      </span>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Método de Pago</label>
+
+    <div class="payment-option active">
+      <div class="icon-box">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="2" y1="10" x2="22" y2="10"></line>
+        </svg>
+      </div>
+      <span class="option-name">Mercado Pago</span>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="cleanAmount()">Cancelar</button>
+    <button class="btn btn-primary" (click)="onDeposit()">Continuar</button>
+  </div>
+
+</div>
