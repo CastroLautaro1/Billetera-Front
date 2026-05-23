@@ -9,7 +9,19 @@
     </div>
 
     <div class="main-info">
-      <h2 class="title">Transferencia exitosa</h2>
+      <h2 class="title">
+        @switch (transaction()?.transactionType) {
+          @case ("TRANSFER") {
+            Transferencia exitosa
+          }
+          @case ("DEPOSIT") {
+            Depósito exitoso
+          }
+          @case ("WITHDRAWAL") {
+            Retiro exitoso
+          }
+        }
+      </h2>
       <p class="date">
         {{ transaction()?.timestamp | date: "EEEE, d 'de' MMMM 'de' y - HH:mm" : 'es-AR' }}
       </p>
